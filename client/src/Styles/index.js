@@ -178,7 +178,9 @@ export const components = {
       outline: none;
     }
   `,
-
+  radioInput: css``,
+  labeledRadioInput: css``,
+  labeledTextArea: css``,
   button: css`
     padding: 4px 12px;
     letter-spacing: 1px;

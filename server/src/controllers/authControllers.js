@@ -105,17 +105,12 @@ const logIn = catchErrors(async (req, res) => {
 	}
 
 	if (!isValidPass) {
-		throw new CustomError(
-			`Failed to log in: invalid credentials`,
-			401,
-			`Invalid credentials`,
-		);
+		throw new CustomError('Failed to log in', 401, 'Invalid credentials');
 	}
 	let token = jwt.sign(
 		{
 			email: email,
 			u_id: existingUser.u_id,
-			role: existingUser.role,
 		},
 		process.env.TOKEN_PASS || 'development',
 		{
@@ -127,7 +122,6 @@ const logIn = catchErrors(async (req, res) => {
 		{
 			email: email,
 			u_id: existingUser.u_id,
-			role: existingUser.role,
 		},
 		process.env.REFRESH_PASS || 'development',
 		{
@@ -143,7 +137,6 @@ const logIn = catchErrors(async (req, res) => {
 		user: {
 			email: existingUser.email,
 			u_id: existingUser.u_id,
-			role: existingUser.role,
 		},
 	});
 }, 'Failed to log in');

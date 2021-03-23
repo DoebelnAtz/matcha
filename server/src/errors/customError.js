@@ -1,4 +1,3 @@
-
 class CustomError extends Error {
 	constructor(
 		response = 'Internal server error',
@@ -7,7 +6,10 @@ class CustomError extends Error {
 		message = '',
 	) {
 		super();
-
+		this._response = response;
+		this._status = status;
+		this._description = description;
+		this._message = message;
 	}
 }
 module.exports = CustomError;

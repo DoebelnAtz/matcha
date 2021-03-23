@@ -6,8 +6,8 @@ import { getLocal, objectToQueryString } from "../Utils";
 const defaults = {
   headers: () => ({
     "Content-Type": "application/json",
-    Authorization: getLocal("token")
-      ? `Bearer ${getLocal("token")}`
+    Authorization: getLocal("auth")
+      ? `Bearer ${getLocal("auth").token}`
       : undefined,
   }),
   error: {

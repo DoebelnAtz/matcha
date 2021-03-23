@@ -3,19 +3,33 @@ import {
   FormContainer,
   InputGroupDiv,
   LabeledInput,
+  LabeledRadioInput,
+  LabeledTextarea,
+  RadioInput,
   SubmitButton,
 } from "./styles";
+import DropDownComponent from "../DropDown";
 
 const assembleState = (config) => {
   if (!config) return {};
   let state = {};
   config.forEach((el) => {
-    let temp = {};
-    temp = "";
-    if (el.confirm) {
-      state[`confirm-${el.name}`] = "";
+    switch (el.element) {
+      case "dropdown":
+        state[el.name] = {
+          option: el.name,
+          id: -1,
+        };
+        break;
+      default:
+        let temp = {};
+        temp = "";
+        if (el.confirm) {
+          state[`confirm-${el.name}`] = "";
+        }
+        state[el.name] = temp;
+        break;
     }
-    state[el.name] = temp;
   });
   return state;
 };
@@ -42,6 +56,27 @@ const Form = ({ config, onSubmit, state, setState }) => {
 
   const renderElement = (configElement) => {
     switch (configElement.element) {
+      case "dropdown":
+        return (
+          <DropDownComponent
+            width={"160px"}
+            state={state[configElement.name]}
+            optionList={configElement.values.map((val, index) => ({
+              option: val,
+              id: index,
+            }))}
+            setSelect={(newVal) =>
+              setState({ ...state, [configElement.name]: newVal })
+            }
+          />
+        );
+
+      case "textarea":
+        return (
+          <LabeledTextarea>
+            <textarea />
+          </LabeledTextarea>
+        );
       default:
         return (
           <>

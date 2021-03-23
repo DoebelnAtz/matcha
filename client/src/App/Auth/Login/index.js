@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Form from "../../Components/Form";
 import api from "../../../Api";
+import { setLocal } from "../../../Utils";
 
 const LogIn = () => {
   const [formValue, setFormValue] = useState();
-
+  const history = useHistory();
   const formConfig = [
     {
       element: "input",
@@ -29,7 +31,12 @@ const LogIn = () => {
       email: formValue.email,
       password: formValue.password,
     });
-    console.log(resp);
+    setLocal("auth", {
+      token: resp.token,
+      refreshToken: resp.token,
+      user: resp.user,
+    });
+    history.push("/");
   };
   return (
     <div>

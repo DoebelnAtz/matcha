@@ -20,6 +20,15 @@ export const LabeledInput = styled.label`
   ${layout.centered};
 `;
 
+export const LabeledTextarea = styled.label`
+  ${components.labeledTextArea};
+  ${layout.centered};
+`;
+
+export const LabeledRadioInput = styled.label`
+  ${components.labeledRadioInput};
+`;
+
 export const SubmitButton = styled.button`
   ${components.button};
   ${layout.centered};
