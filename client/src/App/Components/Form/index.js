@@ -16,19 +16,27 @@ const assembleState = (config) => {
   config.forEach((el) => {
     switch (el.element) {
       case "dropdown":
-        state[el.name] = {
-          option: el.name,
-          id: -1,
-        };
+        if (el.value) {
+          state[el.name] = { option: el.value, id: -1 };
+        } else {
+          state[el.name] = {
+            option: el.name,
+            id: -1,
+          };
+        }
         break;
       default:
         let temp = {};
         temp = "";
-        if (el.confirm) {
-          state[`confirm-${el.name}`] = "";
+        if (el.value) {
+          state[el.name] = el.value;
+        } else {
+          if (el.confirm) {
+            state[`confirm-${el.name}`] = "";
+          }
+          state[el.name] = temp;
+          break;
         }
-        state[el.name] = temp;
-        break;
     }
   });
   return state;
@@ -39,7 +47,7 @@ const Form = ({ config, onSubmit, state, setState }) => {
 
   useEffect(() => {
     setState(assembleState(config));
-  }, []);
+  }, [JSON.stringify(config)]);
 
   const handleChange = (name, e) => {
     let newVal = e.target.value;
