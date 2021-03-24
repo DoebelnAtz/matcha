@@ -11,7 +11,6 @@ const checkToken = (req, res, next) => {
 	if (token.startsWith('Bearer ')) {
 		token = token.slice(7, token.length);
 	}
-	console.log(token);
 	if (token) {
 		jwt.verify(token, process.env.TOKEN_PASS, (err, decoded) => {
 			if (err) {

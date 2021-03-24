@@ -30,12 +30,12 @@ export const units = {
   ms: "10px",
   mm: "16px",
   ml: "24px",
-  rs: "10px",
-  rm: "16px",
-  rl: "24px",
-  ps: "10px",
-  pm: "16px",
-  pl: "24px",
+  rs: "4px",
+  rm: "8px",
+  rl: "14px",
+  ps: "6px",
+  pm: "12px",
+  pl: "20px",
   tablet: "1000px",
   mobile: "600px",
 };
@@ -156,7 +156,7 @@ export const components = {
     }
   `,
   labeledInput: css`
-    ${font.DCBold};
+    ${font.roboto};
     font-size: 20px;
     color: ${color.primary};
     display: flex;
@@ -180,7 +180,30 @@ export const components = {
   `,
   radioInput: css``,
   labeledRadioInput: css``,
-  labeledTextArea: css``,
+  labeledTextArea: css`
+    ${font.roboto};
+    font-size: 20px;
+    color: ${color.primary};
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    & textarea {
+      font-size: 16px;
+      border-radius: 0;
+      resize: vertical;
+      ${font.roboto};
+      box-shadow: none;
+      background-color: ${color.tertiary};
+      border: none;
+      caret-color: ${color.primary};
+      caret-shape: block;
+      color: ${color.primary};
+      padding: 2px 6px;
+    }
+    & textarea:focus {
+      outline: none;
+    }
+  `,
   button: css`
     padding: 4px 12px;
     letter-spacing: 1px;

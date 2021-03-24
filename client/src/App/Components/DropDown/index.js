@@ -9,7 +9,7 @@ import {
 } from "./styles";
 import React, { useEffect, useRef, useState } from "react";
 
-import dropdownIcon from "../../../assets/images/dropdown.png";
+import dropdownIcon from "../../../Assets/images/dropdown.png";
 
 const DropDownComponent = ({
   state,

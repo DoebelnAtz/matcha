@@ -4,20 +4,20 @@ const cors = require('cors');
 const { handleError } = require('./middleware/error');
 require('dotenv').config({ path: __dirname + '/.env' });
 const checkToken = require('./middleware/auth');
+const logIncoming = require('./middleware/log');
 const testRouter = require('./routes/testRoutes');
 const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRouter');
+const imageRouter = require('./routes/imageRouter');
 const setup = require('./db/setup/index');
 app.use(cors());
 
 app.use(express.json());
-app.use('/api', (req, res, next) => {
-	console.log(`path: ${req.path} | query: ${JSON.stringify(req.query)}`);
-	next();
-});
+app.use('/api', logIncoming);
 app.use('/api/auth', authRouter);
 app.use('/api', checkToken);
 app.use('/api/users', userRouter);
+app.use('/api/images', imageRouter);
 
 app.use('/', handleError);
 

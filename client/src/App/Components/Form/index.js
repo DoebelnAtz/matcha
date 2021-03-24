@@ -82,7 +82,11 @@ const Form = ({ config, onSubmit, state, setState }) => {
       case "textarea":
         return (
           <LabeledTextarea>
-            <textarea />
+            {configElement.name}
+            <textarea
+              value={state[configElement.name]}
+              onChange={(e) => handleChange(configElement.name, e)}
+            />
           </LabeledTextarea>
         );
       default:

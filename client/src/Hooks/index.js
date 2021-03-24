@@ -1,7 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import { useDeepCompareMemoize } from "../Utils";
-import { useHistory, useLocation } from "react-router";
+import { useEffect, useState, useRef, useContext } from "react";
+import { getLocal, useDeepCompareMemoize } from "../Utils";
+import { useHistory, useLocation } from "react-router-dom";
 import api from "../Api";
+import { AuthContext } from "../Contexts/AuthContext";
+
 export const useInput = () => {
   const ref = useRef();
   const [value, setValue] = useState("");
@@ -71,6 +73,25 @@ export const useMounted = () => {
     };
   }, []);
   return isMounted;
+};
+
+export const useAuth = () => {
+  const location = useLocation();
+  const { state: token, update: setToken } = useContext(AuthContext);
+  useEffect(() => {
+    api.get("/users/me").then((r) =>
+      setToken({
+        ...token,
+        user: {
+          ...token.user,
+          u_id: r.u_id,
+          email: r.email,
+          verified: r.verified,
+        },
+      })
+    );
+  }, [location.pathname]);
+  return [token, setToken];
 };
 
 export function useGet(url, variables = {}, conditional = true) {

@@ -72,13 +72,26 @@ const signUp = catchErrors(async (req, res) => {
 const getUserInfo = catchErrors(async (req, res) => {}, '');
 const updateUserInfo = catchErrors(async (req, res) => {}, '');
 
+const verifyUser = catchErrors(async (req, res) => {
+	const { gender, preference, email, bio, name } = req.body;
+	const u_id = req.params.uid;
+	await query(
+		`
+		UPDATE users SET gender = $1, preference = $2, bio = $3, verified = TRUE where u_id = $4
+		
+	`,
+		[gender, preference, bio, u_id],
+	);
+	res.json({ success: true });
+}, 'Failed to verify user');
+
 const logIn = catchErrors(async (req, res) => {
 	const { email, password } = req.body;
 
 	let existingUser;
 
 	existingUser = await query(
-		'SELECT email, u_id, password FROM users WHERE email = $1',
+		'SELECT email, u_id, password, verified FROM users WHERE email = $1',
 		[email.toLowerCase()],
 	);
 	existingUser = existingUser.rows[0];
@@ -111,6 +124,7 @@ const logIn = catchErrors(async (req, res) => {
 		{
 			email: email,
 			u_id: existingUser.u_id,
+			verified: existingUser.verified,
 		},
 		process.env.TOKEN_PASS || 'development',
 		{
@@ -122,6 +136,7 @@ const logIn = catchErrors(async (req, res) => {
 		{
 			email: email,
 			u_id: existingUser.u_id,
+			verified: existingUser.verified,
 		},
 		process.env.REFRESH_PASS || 'development',
 		{
@@ -172,4 +187,4 @@ const sendEmailInvites = async (recipient) => {
 	});
 };
 
-module.exports = { signUp, logIn };
+module.exports = { signUp, logIn, verifyUser };

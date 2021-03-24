@@ -13,7 +13,7 @@ const setup = async () => {
             bio TEXT,
             tags TEXT,
             verified BOOLEAN DEFAULT FALSE,
-            pictures TEXT
+            pictures TEXT DEFAULT '[]'
         )
     `);
 };

@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 import Form from "../../Components/Form";
 import api from "../../../Api";
 import { setLocal } from "../../../Utils";
+import { useAuth } from "../../../Hooks";
 
 const LogIn = () => {
   const [formValue, setFormValue] = useState();
   const history = useHistory();
+  const [token, setToken] = useAuth();
+
   const formConfig = [
     {
       element: "input",
@@ -31,11 +34,8 @@ const LogIn = () => {
       email: formValue.email,
       password: formValue.password,
     });
-    setLocal("auth", {
-      token: resp.token,
-      refreshToken: resp.token,
-      user: resp.user,
-    });
+    setLocal("auth", resp);
+    setToken(resp);
     history.push("/");
   };
   return (

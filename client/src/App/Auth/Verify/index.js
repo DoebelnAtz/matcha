@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Form from "../../Components/Form";
 import api from "../../../Api";
 import { useGet } from "../../../Hooks";
+import ImageUpload from "../../Components/ImageUpload";
+import ProfileImage from "../../Components/ProfileImage";
 
 const Verify = () => {
   const uid = useParams().uid;
@@ -31,43 +33,34 @@ const Verify = () => {
       value: user?.preference,
     },
     {
-      element: "input",
-      name: "profile-pic",
-      placeholder: "profile picture url",
+      element: "textarea",
       type: "text",
+      name: "bio",
+      placeholder: "bio",
       required: true,
       autoComplete: false,
-      value: user?.pictures,
-    },
-    {
-      element: "input",
-      type: "email",
-      name: "email",
-      placeholder: "email",
-      required: true,
-      autoComplete: false,
-      value: user?.email,
-    },
-    {
-      element: "input",
-      type: "text",
-      name: "name",
-      placeholder: "name",
-      required: true,
-      autoComplete: false,
-      value: user?.name,
+      value: user?.bio,
     },
   ];
-
+  console.log(formValue);
   const onSubmit = async () => {
     console.log("submitted");
-    await api.post("/auth/signup", {
-      name: formValue.name,
-      email: formValue.email,
-      password: formValue.password,
-      dob: new Date(5),
+    await api.post(`/auth/verify/${uid}`, {
+      bio: formValue.bio,
+      preference: formValue.preference.option,
+      gender: formValue.gender.option,
     });
   };
+
+  const renderImages = () => {
+    if (user) {
+      return user.pictures.map((pics, index) => {
+        console.log(pics);
+        return <ProfileImage key={index} src={pics.url} alt={"pic"} />;
+      });
+    }
+  };
+
   return (
     <div>
       {formConfig && (
@@ -78,6 +71,8 @@ const Verify = () => {
           setState={setFormValue}
         />
       )}
+      <ImageUpload />
+      {renderImages()}
     </div>
   );
 };
