@@ -16,6 +16,18 @@ const getMe = catchErrors(async (req, res) => {
 	res.json(user);
 }, '');
 
+const getProfileFeed = catchErrors(async (req, res) => {
+	const id = req.decoded.u_id;
+	let profiles = await query(
+		`
+		SELECT name, dob, gender, bio, pictures WHERE NOT u_id = $1
+	`,
+		[id],
+	);
+	profiles = parseQuery(profiles);
+	res.json(profiles);
+}, 'Failed to get profile feed');
+
 module.exports = {
 	getMe,
 };
