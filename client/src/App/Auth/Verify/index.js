@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Form from "../../Components/Form";
 import api from "../../../Api";
-import { useGet } from "../../../Hooks";
+import { useAuth, useGet, useRedirect, useToken } from "../../../Hooks";
 import ImageUpload from "../../Components/ImageUpload";
 import ProfileImage from "../../Components/ProfileImage";
-
+import { redirect } from "../../../Utils";
 const Verify = () => {
   const uid = useParams().uid;
   console.log(uid);
-
+  const [auth] = useToken();
+  console.log(auth);
   const [formValue, setFormValue] = useState();
   const [user, setUser] = useGet("/users/me");
   console.log(user);
@@ -61,7 +62,9 @@ const Verify = () => {
     }
   };
 
-  return (
+  return redirect(
+    "/",
+    !!auth.user.verified,
     <div>
       {formConfig && (
         <Form

@@ -13,21 +13,11 @@ import Home from "./Home";
 import { useAuth, useGet } from "../Hooks";
 import Verify from "./Auth/Verify";
 function App() {
-  const [token] = useAuth();
-  console.log(token);
   return (
     <AppDiv id={"App"}>
       <Switch>
         <Route exact path={"/"}>
-          {token ? (
-            token.user.verified ? (
-              <Home />
-            ) : (
-              <Redirect to={`/auth/verify/${token.user.u_id}`} />
-            )
-          ) : (
-            <Redirect to={`/auth/login`} />
-          )}
+          <Home />
         </Route>
         <Route exact path={"/auth/login"}>
           <LogIn />

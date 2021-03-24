@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react";
-import { getLocal, useDeepCompareMemoize } from "../Utils";
+import { getLocalAuth, useDeepCompareMemoize } from "../Utils";
 import { useHistory, useLocation } from "react-router-dom";
 import api from "../Api";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -92,6 +92,25 @@ export const useAuth = () => {
     );
   }, [location.pathname]);
   return [token, setToken];
+};
+
+export const useToken = () => {
+  const { state: token, update: setToken } = useContext(AuthContext);
+  useEffect(() => {
+    console.log(getLocalAuth());
+    setToken(getLocalAuth());
+  }, []);
+  return [token, setToken];
+};
+
+export const useRedirect = (to, condition) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (condition) {
+      history.push(to);
+    }
+  }, [condition, to]);
 };
 
 export function useGet(url, variables = {}, conditional = true) {

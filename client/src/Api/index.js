@@ -1,13 +1,13 @@
 import axios from "axios";
 
 import config from "../Config";
-import { getLocal, objectToQueryString } from "../Utils";
+import { getLocalAuth, objectToQueryString } from "../Utils";
 
 const defaults = {
   headers: () => ({
     "Content-Type": "application/json",
-    Authorization: getLocal("auth")
-      ? `Bearer ${getLocal("auth").token}`
+    Authorization: getLocalAuth("auth")
+      ? `Bearer ${getLocalAuth("auth").token}`
       : undefined,
   }),
   error: {
@@ -33,6 +33,10 @@ const makeRequest = async (method, url, data) =>
       },
       (error) => {
         if (error.response) {
+          if (error.response.status === 401) {
+            window.localStorage.clear();
+            window.location.replace("/auth/login");
+          }
           reject(defaults.error);
         } else {
           reject(defaults.error);

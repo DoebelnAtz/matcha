@@ -25,6 +25,11 @@ const assembleState = (config) => {
           };
         }
         break;
+      case "textarea":
+        if (el.value) {
+          state[el.name] = el.value;
+        }
+        break;
       default:
         let temp = {};
         temp = "";

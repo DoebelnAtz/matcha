@@ -72,6 +72,18 @@ const signUp = catchErrors(async (req, res) => {
 const getUserInfo = catchErrors(async (req, res) => {}, '');
 const updateUserInfo = catchErrors(async (req, res) => {}, '');
 
+const verifyToken = catchErrors(async (req, res) => {
+	const u_id = req.params.uid;
+	await query(
+		`
+		'SELECT email, u_id, password, verified FROM users WHERE u_id = $1',
+		
+	`,
+		[u_id],
+	);
+	res.json({ success: true });
+}, 'Failed to verify token');
+
 const verifyUser = catchErrors(async (req, res) => {
 	const { gender, preference, email, bio, name } = req.body;
 	const u_id = req.params.uid;
@@ -152,6 +164,7 @@ const logIn = catchErrors(async (req, res) => {
 		user: {
 			email: existingUser.email,
 			u_id: existingUser.u_id,
+			verified: existingUser.verified,
 		},
 	});
 }, 'Failed to log in');

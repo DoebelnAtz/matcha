@@ -1,20 +1,28 @@
 import queryString from "query-string";
 import { useRef } from "react";
+import React from "react";
 import { isEqual } from "lodash";
+import Redirect from "react-router-dom/es/Redirect";
 
 export const capitalizeFirst = (string) => {
   if (string) return string[0].toUpperCase() + string.slice(1);
 };
 
-export const getLocal = (item) => {
+export const redirect = (to, condition, otherwise) => {
+  return condition ? <Redirect to={to} /> : otherwise;
+};
+
+export const getLocalAuth = () => {
   try {
-    if (item) {
-      return JSON.parse(localStorage.getItem(item) || "");
-    } else {
-      return null;
-    }
+    return (
+      JSON.parse(localStorage.getItem("auth")) || {
+        token: "",
+        refreshToken: "",
+        user: { verified: false },
+      }
+    );
   } catch (e) {
-    return false;
+    return { token: "", refreshToken: "", user: { verified: false } };
   }
 };
 

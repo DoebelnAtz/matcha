@@ -7,7 +7,7 @@ const getMe = catchErrors(async (req, res) => {
 	const id = req.decoded.u_id;
 	let user = await query(
 		`
-        SELECT email, name, dob, u_id, verified, preference, gender, pictures FROM users WHERE u_id = $1
+        SELECT email, name, dob, u_id, bio, verified, preference, gender, pictures FROM users WHERE u_id = $1
     `,
 		[id],
 	);
