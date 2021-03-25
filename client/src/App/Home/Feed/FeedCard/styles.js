@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { color } from '../../../../Styles';
+import { animated } from 'react-spring';
 
-export const FeedCardDiv = styled.div`
+export const FeedCardDiv = styled(animated.div)`
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0;
-	display: ${(props) => (props.page > props.index ? 'none' : 'block')};
+	user-select: none;
+	box-shadow: 0px 0px 30px 2px gray;
 	z-index: ${(props) => 50 - (props.index - props.page)};
 	background-color: navajowhite;
 `;
