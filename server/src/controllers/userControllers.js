@@ -18,16 +18,24 @@ const getMe = catchErrors(async (req, res) => {
 
 const getProfileFeed = catchErrors(async (req, res) => {
 	const id = req.decoded.u_id;
+	const page = req.query.page;
 	let profiles = await query(
 		`
-		SELECT name, dob, gender, bio, pictures WHERE NOT u_id = $1
+		SELECT name, dob, gender, bio, pictures 
+		FROM users 
+		WHERE NOT u_id = $1 
+		ORDER BY name ASC OFFSET $2 LIMIT 3
 	`,
-		[id],
+		[id, page],
 	);
-	profiles = parseQuery(profiles);
+	profiles = parseQuery(profiles).map((profile) => ({
+		...profile,
+		pictures: JSON.parse(profile.pictures),
+	}));
 	res.json(profiles);
 }, 'Failed to get profile feed');
 
 module.exports = {
 	getMe,
+	getProfileFeed,
 };
