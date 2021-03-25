@@ -8,6 +8,8 @@ export const FeedCardDiv = styled(animated.div)`
 	position: absolute;
 	top: 0;
 	user-select: none;
+	touch-action: none;
+	will-change: transform;
 	box-shadow: 0px 0px 30px 2px gray;
 	z-index: ${(props) => 50 - (props.index - props.page)};
 	background-color: navajowhite;

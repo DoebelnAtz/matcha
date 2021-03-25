@@ -30,7 +30,7 @@ const Feed = () => {
 			return feed.map((profile, index) => {
 				return (
 					<FeedCard
-						key={profile.u_id}
+						key={index}
 						index={index}
 						page={page}
 						profile={profile}
