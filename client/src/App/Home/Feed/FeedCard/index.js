@@ -3,6 +3,7 @@ import { FeedCardDiv, ProfilePictureDiv } from './styles';
 import Picture from '../../../Components/Picture';
 import { useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+import BlurredBackground from './BlurredBackground';
 
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (x, y, r) => `
@@ -63,11 +64,10 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				page={page}
 				index={index}
 			>
+				<BlurredBackground hash={profile.pictures[0].hash} />
 				<ProfilePictureDiv>
 					<Picture pic={profile.pictures[0]} />
 				</ProfilePictureDiv>
-				{profile.name}
-				<button onClick={() => setPage(page + 1)}>next</button>
 			</FeedCardDiv>
 		</>
 	);

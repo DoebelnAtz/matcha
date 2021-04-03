@@ -54,7 +54,7 @@ export const DropDownList = styled.div`
 		props.modalOverflow ? 'fixed' : 'absolute'};
 	//right: -1px;
 	width: calc(${(props) => props.width} - 2px);
-	background-color: ${color.BG0};
+	background-color: ${color.gray100};
 	z-index: 5;
 	max-height: 300px;
 	overflow-y: auto;
@@ -85,7 +85,7 @@ export const Option = styled.div`
 	padding: 0 4px;
 	text-align: left;
 	background-color: ${(props) =>
-		props.highlighted ? color.tertiary : color.BG1};
+		props.highlighted ? color.tertiary : color.gray200};
 	transition: background-color 0.05s;
 	${cursor.clickable};
 	&:hover {
