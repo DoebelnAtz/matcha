@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {
-	FeedBlurredContainer,
+	FeedBlurredBottom,
+	FeedBlurredTop,
+	FeedBlurredTopCutout,
 	FeedControls,
 	FeedDiv,
 	FeedTopNav,
@@ -8,7 +10,6 @@ import {
 } from './styles';
 import { useFeed, useGet } from '../../../Hooks';
 import FeedCard from './FeedCard';
-import overlayImage from '../../../Assets/images/overlay.svg';
 // num of profiles left before we get next batch
 const nextBatchVal = 2;
 
@@ -49,7 +50,8 @@ const Feed = () => {
 	return (
 		<FeedDiv id={'Feed'}>
 			{renderFeed()}
-			<FeedBlurredContainer />
+			<FeedBlurredTop />
+			<FeedBlurredBottom />
 		</FeedDiv>
 	);
 };

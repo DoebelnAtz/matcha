@@ -3,20 +3,17 @@ import { color, font, units } from '../../../../Styles';
 import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
-	width: 100%;
-	height: 100%;
+	width: calc(100% - ${units.mm} * 2);
+	height: calc(100% - 100px - 80px - ${units.mm});
+	margin: calc(80px + ${units.mm}) ${units.mm} 0 ${units.mm};
 	position: absolute;
 	top: 0;
-	border-radius: ${units.rm};
 	display: flex;
 	flex-direction: column;
 	user-select: none;
-	border-radius: ${units.rm};
-	overflow: hidden;
+	overflow: visible;
 	touch-action: none;
 	will-change: transform;
-	box-shadow: ${(props) =>
-		props.index === props.page ? '0px 0px 30px 2px gray' : 'none'};
 	z-index: ${(props) => 50 - (props.index - props.page)};
 `;
 
@@ -24,30 +21,40 @@ const profilePicSize = '400px';
 
 export const ProfilePictureDiv = styled.div`
 	width: 100%;
-	height: calc(100% - 100px - 150px);
+	height: calc(100%);
 	position: relative;
-	margin-top: 80px;
-	border-radius: 20px;
 	overflow: hidden;
-	z-index: 100;
+	z-index: 50;
+	border-radius: ${units.rl};
+
+	flex-shrink: 0;
 `;
 
 export const FeedCardContentDiv = styled.div`
 	display: flex;
 	margin: 0 auto;
+	height: 50px;
+	flex-shrink: 0;
+	width: calc(100% - ${units.pm} * 2 - ${units.ml} * 2);
+	padding: ${units.pm};
+	background-color: rgba(255, 255, 255, 0.75);
+	border-radius: ${units.rl};
 	flex-direction: column;
 	position: relative;
-	z-index: 1;
+	bottom: 65px;
+	z-index: 51;
+	backdrop-filter: blur(20px) saturate(130%) contrast(160%);
 `;
 
 export const FeedCardNameDiv = styled.div`
-	margin: 0 auto;
+	margin: 0;
 `;
 
 export const FeedCardNameSpan = styled.span`
-	color: ${color.primaryShade};
+	color: ${color.text};
 	${font.roboto};
-	font-size: 38px;
+	font-size: 28px;
+	text-align: start;
 `;
 
 export const FeedCardBioDiv = styled.div`

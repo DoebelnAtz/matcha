@@ -56,9 +56,9 @@ export const units = {
 	rs: '4px',
 	rm: '8px',
 	rl: '14px',
-	ps: '6px',
-	pm: '12px',
-	pl: '20px',
+	ps: '10px',
+	pm: '16px',
+	pl: '24px',
 	tablet: '1000px',
 	mobile: '600px',
 };

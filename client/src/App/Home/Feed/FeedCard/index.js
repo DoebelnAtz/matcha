@@ -55,7 +55,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			const r = isGone ? rSwiped : rDragging;
 			const xCorrection = -(x / 5);
 			const yCorrection = Math.abs(x) / 10;
-			console.log(Math.floor(x), Math.floor(y), r, ox, oy);
+			// console.log(Math.floor(x), Math.floor(y), r, ox, oy);
 
 			set({ xy: [x + xCorrection, y + yCorrection, r] });
 		},
@@ -73,22 +73,21 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				page={page}
 				index={index}
 			>
-				<BlurredBackground hash={profile.pictures[0].hash} />
 				<ProfilePictureDiv id={'profile-picture'}>
 					<Picture pic={profile.pictures[0]} />
 				</ProfilePictureDiv>
-				{/*<FeedCardContentDiv id={'content'}>*/}
-				{/*	<FeedCardNameDiv>*/}
-				{/*		<FeedCardNameSpan>*/}
-				{/*			{capitalizeFirst(profile.name)}*/}
-				{/*		</FeedCardNameSpan>*/}
-				{/*	</FeedCardNameDiv>*/}
-				{/*	<FeedCardBioDiv>*/}
-				{/*		<FeedCardBioParagraph>*/}
-				{/*			{profile.bio}*/}
-				{/*		</FeedCardBioParagraph>*/}
-				{/*	</FeedCardBioDiv>*/}
-				{/*</FeedCardContentDiv>*/}
+				<FeedCardContentDiv id={'content'}>
+					<FeedCardNameDiv>
+						<FeedCardNameSpan>
+							{capitalizeFirst(profile.name)}
+						</FeedCardNameSpan>
+					</FeedCardNameDiv>
+					{/*<FeedCardBioDiv>*/}
+					{/*	<FeedCardBioParagraph>*/}
+					{/*		{profile.bio}*/}
+					{/*	</FeedCardBioParagraph>*/}
+					{/*</FeedCardBioDiv>*/}
+				</FeedCardContentDiv>
 			</FeedCardDiv>
 		</>
 	);
