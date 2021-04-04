@@ -13,4 +13,6 @@ export const ImageDiv = styled.div`
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	position: relative;
+	z-index: 52;
 `;

@@ -1,9 +1,18 @@
 import React from 'react';
-import { FeedCardDiv, ProfilePictureDiv } from './styles';
+import {
+	FeedCardBioDiv,
+	FeedCardBioParagraph,
+	FeedCardContentDiv,
+	FeedCardDiv,
+	FeedCardNameDiv,
+	FeedCardNameSpan,
+	ProfilePictureDiv,
+} from './styles';
 import Picture from '../../../Components/Picture';
 import { useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import BlurredBackground from './BlurredBackground';
+import { capitalizeFirst } from '../../../../Utils';
 
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (x, y, r) => `
@@ -65,9 +74,21 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				index={index}
 			>
 				<BlurredBackground hash={profile.pictures[0].hash} />
-				<ProfilePictureDiv>
+				<ProfilePictureDiv id={'profile-picture'}>
 					<Picture pic={profile.pictures[0]} />
 				</ProfilePictureDiv>
+				{/*<FeedCardContentDiv id={'content'}>*/}
+				{/*	<FeedCardNameDiv>*/}
+				{/*		<FeedCardNameSpan>*/}
+				{/*			{capitalizeFirst(profile.name)}*/}
+				{/*		</FeedCardNameSpan>*/}
+				{/*	</FeedCardNameDiv>*/}
+				{/*	<FeedCardBioDiv>*/}
+				{/*		<FeedCardBioParagraph>*/}
+				{/*			{profile.bio}*/}
+				{/*		</FeedCardBioParagraph>*/}
+				{/*	</FeedCardBioDiv>*/}
+				{/*</FeedCardContentDiv>*/}
 			</FeedCardDiv>
 		</>
 	);

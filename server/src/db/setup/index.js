@@ -83,18 +83,6 @@ const mockData = async () => {
 	// 		INSERT INTO languages (name) VALUES ('finnish');
 	// 		INSERT INTO languages (name) VALUES ('swedish');
 	// `);
-	// await query(`
-	// 		INSERT INTO languages (name) VALUES ('english');
-	// 		INSERT INTO languages (name) VALUES ('russian');
-	// 		INSERT INTO languages (name) VALUES ('mandarin');
-	// 		INSERT INTO languages (name) VALUES ('polish');
-	// 		INSERT INTO languages (name) VALUES ('german');
-	// 		INSERT INTO languages (name) VALUES ('french');
-	// 		INSERT INTO languages (name) VALUES ('spanish');
-	// 		INSERT INTO languages (name) VALUES ('italian');
-	// 		INSERT INTO languages (name) VALUES ('finnish');
-	// 		INSERT INTO languages (name) VALUES ('swedish');
-	// `);
 };
 
 const setup = async () => {
@@ -122,7 +110,7 @@ const setup = async () => {
 	`);
 
 	await query(`
-		CREATE TABLE IF NOT EXISTS learning_language (
+		CREATE TABLE IF NOT EXISTS users_languages (
 			l_id INT REFERENCES languages(l_id),
 			u_id TEXT REFERENCES users(u_id),
 			UNIQUE(u_id, l_id)
@@ -130,11 +118,19 @@ const setup = async () => {
 	`);
 
 	await query(`
-		CREATE TABLE IF NOT EXISTS spoken_language (
-			l_id INT REFERENCES languages(l_id),
-			u_id TEXT REFERENCES users(u_id),
-			UNIQUE(u_id, l_id)
+		CREATE TABLE IF NOT EXISTS interests (
+			i_id SERIAL PRIMARY KEY,
+			name TEXT NOT NULL UNIQUE CHECK(name = LOWER(name))
 		)
+	`);
+
+	await query(`
+		CREATE TABLE IF NOT EXISTS users_interests (
+		 	i_id INT REFERENCES interests (i_id) NOT NULL,
+		 	u_id TEXT references users (u_id) NOT NULL,
+		 	UNIQUE(i_id, u_id)
+		 	
+		 )
 	`);
 };
 
