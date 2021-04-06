@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, cursor, font, units } from '../../../Styles';
+import { color, cursor, font, shadows, units } from '../../../Styles';
 
 export const ProfileDiv = styled.div`
 	width: 100%;
@@ -61,9 +61,13 @@ export const ProfilePictureDiv = styled.div`
 	margin: auto;
 `;
 
-export const ProfilePictureImage = styled.img`
+export const ProfilePictureImage = styled.div`
 	height: ${profilePicSize};
 	width: ${profilePicSize};
+	background-image: url(${(props) => props.src});
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 	border-radius: calc(${profilePicSize} / 2);
 	margin: auto;
 	position: relative;
@@ -80,6 +84,7 @@ export const ProfilePageContentContainer = styled.div`
 
 export const ProfilePageNameDiv = styled.div`
 	width: 100%;
+	height: 34px;
 	text-align: center;
 `;
 
@@ -104,14 +109,14 @@ export const ProfilePageOptionButtonDiv = styled.div`
 	transition: all 0.1s ease-in-out;
 
 	box-shadow: 4px 4px 10px 6px rgba(0, 0, 0, 0.2),
-		-4px -4px 10px 6px rgba(255, 255, 255, 0.8),
+		-4px -4px 10px 6px rgba(255, 255, 255, 1),
 		inset 2px 2px 10px 2px rgba(0, 0, 0, 0.1),
-		inset -2px -2px 10px 2px rgba(255, 255, 255, 0.8);
+		inset -2px -2px 10px 2px rgba(255, 255, 255, 1);
 	&:hover {
 		box-shadow: 4px 4px 10px 6px rgba(0, 0, 0, 0.2),
-			-4px -4px 10px 6px rgba(255, 255, 255, 0.8),
+			-4px -4px 10px 6px rgba(255, 255, 255, 1),
 			inset 3px 3px 10px 2px rgba(0, 0, 0, 0.2),
-			inset -3px -3px 10px 2px rgba(255, 255, 255, 0.8);
+			inset -3px -3px 10px 2px rgba(255, 255, 255, 1);
 		& > div {
 			transform: scale(0.98);
 		}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
 	BlurredBackgroundDiv,
 	ProfileContainer,
@@ -23,8 +24,10 @@ import LikeIcon from '../../../Assets/icons/heart.svg';
 import PhotosIcon from '../../../Assets/icons/camera.svg';
 
 const Profile = () => {
+	const history = useHistory();
 	const [profile, setProfile, isLoading] = useGet('/users/me');
 	console.log(profile);
+
 	return (
 		<ProfileDiv>
 			<ProfileContainer>
@@ -62,7 +65,9 @@ const Profile = () => {
 						>
 							<ProfilePageButton src={SettingsIcon} />
 						</ProfilePageOptionButtonDiv>
-						<ProfilePageOptionButtonDiv>
+						<ProfilePageOptionButtonDiv
+							onClick={() => history.push('/profile/photos')}
+						>
 							<ProfilePageButton src={PhotosIcon} />
 						</ProfilePageOptionButtonDiv>
 					</ProfilePageOptionContainer>

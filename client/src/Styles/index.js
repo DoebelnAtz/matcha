@@ -53,6 +53,7 @@ export const units = {
 	ms: '12px',
 	mm: '16px',
 	ml: '24px',
+	mxl: '34px',
 	rs: '4px',
 	rm: '8px',
 	rl: '14px',
@@ -87,6 +88,12 @@ export const font = {
 		&:hover {
 			color: ${colorAdjust.darken(color.tertiary, 0.2)};
 		}
+	`,
+};
+
+export const shadows = {
+	standOut: css`
+		box-shadow: -4px -4px 14px 4px #ffffff, 4px 4px 14px 4px #00000060;
 	`,
 };
 

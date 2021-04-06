@@ -6,10 +6,8 @@ export const HomeDiv = styled.div`
 	max-width: 1000px;
 	margin: auto;
 	height: 100%;
-	background-color: beige;
 	display: flex;
 	overflow: hidden;
-	box-shadow: inset 0px 0px 10px 2px darkgoldenrod;
 `;
 
 export const HomeContainerDiv = styled.div`
@@ -22,6 +20,7 @@ export const HomeContainerDiv = styled.div`
 	background-color: ${color.gray200};
 	display: flex;
 	position: relative;
+	flex-shrink: 0;
 `;
 
 const topNavSize = '80px';
@@ -49,8 +48,9 @@ export const HomeTopNav = styled.div`
 
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
-	width: 100%;
-	background-color: ${color.gray200};
+	width: calc(100% - ${units.pm} * 2);
+	padding: ${units.pm};
+	background-color: ${color.gray300};
 	position: absolute;
 	backdrop-filter: blur(10px) contrast(80%) saturate(130%);
 	bottom: 0;

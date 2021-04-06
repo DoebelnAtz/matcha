@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { UploadButton } from './styles';
-import api from '../../../Api';
+import React, { useRef, useState } from 'react';
+import { useGet } from '../../../../../Hooks';
+import { AddPhotoDiv, HiddenFileInput } from './styles';
+import AddImageIcon from '../../../../../Assets/icons/add.svg';
+import api from '../../../../../Api';
+
 const acceptedTypes = ['image/jpeg', 'image/png'];
 
-const ImageUpload = () => {
+const AddPhoto = () => {
+	const inputRef = useRef(null);
 	const [selectedFile, setSelectedFile] = useState();
 	const [errors, setErrors] = useState({
 		fileError: '',
 	});
-
 	const handleFileUpload = async (event) => {
 		const data = new FormData();
 
@@ -49,15 +52,20 @@ const ImageUpload = () => {
 			}
 		}
 	};
+	console.log(inputRef);
+	const handleAddPhotoClick = (e) => {
+		e.preventDefault();
+		console.log('clicked');
+		if (inputRef.current) {
+			inputRef.current.click();
+		}
+	};
+
 	return (
-		<div>
-			<input
-				type={'file'}
-				onChange={(e) => handleFileChange(e.target.files)}
-			/>
-			<UploadButton onClick={handleFileUpload}>upload</UploadButton>
-		</div>
+		<AddPhotoDiv onClick={(e) => handleAddPhotoClick(e)} src={AddImageIcon}>
+			<HiddenFileInput type={'file'} ref={inputRef} />
+		</AddPhotoDiv>
 	);
 };
 
-export default ImageUpload;
+export default AddPhoto;

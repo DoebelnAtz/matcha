@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { BottomNavDiv, BottomNavIcon, BottomNavIconContainer } from './styles';
+import {
+	BottomNavDiv,
+	BottomNavIcon,
+	BottomNavIconContainer,
+	BottomNavIconDiv,
+} from './styles';
 import UserIcon from '../../../Assets/icons/user.svg';
 import HomeIcon from '../../../Assets/icons/home.svg';
 import SettingsIcon from '../../../Assets/icons/settin_gear.svg';
@@ -12,22 +17,33 @@ const BottomNav = () => {
 
 	const handleNavClick = (to) => {
 		history.push(to);
+		setLocation(to);
 	};
+
+	const [location, setLocation] = useState(history.location.pathname);
+
+	console.log(history.location.pathname);
 	return (
 		<BottomNavDiv>
 			<BottomNavIconContainer>
-				<BottomNavIcon
-					src={UserIcon}
+				<BottomNavIconDiv
 					onClick={() => handleNavClick('/profile')}
-				/>
-				<BottomNavIcon
-					src={HomeIcon}
+					active={location === '/profile'}
+				>
+					<BottomNavIcon src={UserIcon} />
+				</BottomNavIconDiv>
+				<BottomNavIconDiv
 					onClick={() => handleNavClick('/')}
-				/>
-				<BottomNavIcon
-					src={SearchIcon}
+					active={location === '/'}
+				>
+					<BottomNavIcon src={HomeIcon} />
+				</BottomNavIconDiv>
+				<BottomNavIconDiv
 					onClick={() => handleNavClick('/search')}
-				/>
+					active={location === '/search'}
+				>
+					<BottomNavIcon src={SearchIcon} />
+				</BottomNavIconDiv>
 			</BottomNavIconContainer>
 		</BottomNavDiv>
 	);

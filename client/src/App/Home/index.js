@@ -12,6 +12,7 @@ import {
 import { Switch, Route } from 'react-router-dom';
 import Profile from './Profile';
 import BottomNav from './BottomNav';
+import ProfilePhotos from './Profile/ProfilePhotos';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -29,6 +30,9 @@ const Home = () => {
 						</Route>
 						<Route exact path={'/profile'}>
 							<Profile />
+						</Route>
+						<Route exact path={'/profile/photos'}>
+							<ProfilePhotos />
 						</Route>
 					</Switch>
 				</ViewContainerDiv>
