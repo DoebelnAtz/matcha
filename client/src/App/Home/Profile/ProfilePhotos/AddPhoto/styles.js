@@ -5,11 +5,12 @@ export const AddPhotoDiv = styled.div`
 	width: 40%;
 	height: 120px;
 	border: 6px solid ${color.gray200};
+	margin-bottom: ${units.mxl};
 	border-radius: ${units.rl};
 	${shadows.standOut};
 	background-image: url(${(props) => props.src});
 	background-position: center;
-	background-size: 50px auto;
+	background-size: ${(props) => props.size};
 	background-repeat: no-repeat;
 `;
 

@@ -1,24 +1,59 @@
 import React, { useRef, useState } from 'react';
-import { useGet } from '../../../../../Hooks';
 import { AddPhotoDiv, HiddenFileInput } from './styles';
 import AddImageIcon from '../../../../../Assets/icons/add.svg';
+import { encode } from 'blurhash';
 import api from '../../../../../Api';
 
 const acceptedTypes = ['image/jpeg', 'image/png'];
 
-const AddPhoto = () => {
+const AddPhoto = ({ profile, setProfile, index }) => {
 	const inputRef = useRef(null);
 	const [selectedFile, setSelectedFile] = useState();
 	const [errors, setErrors] = useState({
 		fileError: '',
 	});
-	const handleFileUpload = async (event) => {
+
+	const loadImage = async (file) =>
+		new Promise((resolve, reject) => {
+			const img = new Image();
+			const fr = new FileReader();
+			fr.onload = function () {
+				img.src = fr.result;
+				resolve(img);
+			};
+			fr.readAsDataURL(file);
+			img.onerror = (...args) => reject(args);
+		});
+
+	const getImageData = async (image) => {
+		const canvas = document.createElement('canvas');
+		canvas.width = image.width;
+		canvas.height = image.height;
+		const context = canvas.getContext('2d');
+		context.drawImage(image, 0, 0);
+		return context.getImageData(0, 0, image.width, image.height);
+	};
+
+	const encodeImageToBlurhash = async (img) => {
+		const image = await loadImage(img);
+		const imageData = await getImageData(image);
+		console.log(image, imageData);
+		console.log(imageData.width, imageData.height);
+		return encode(imageData.data, imageData.width, imageData.height, 5, 3);
+	};
+
+	const handleFileUpload = async (file) => {
 		const data = new FormData();
 
-		if (!!selectedFile && selectedFile.size < 50000000) {
-			data.append('file', selectedFile);
+		if (!!file && file.size < 50000000) {
+			const hash = await encodeImageToBlurhash(file);
+			console.log(hash);
+			data.append('file', file);
+			data.append('hash', hash);
+			console.log(data);
 			try {
 				let resp = await api.post(`/images/upload`, data);
+				setProfile({ ...profile, pictures: resp.pics });
 				return true;
 			} catch (e) {
 				console.log(e);
@@ -29,9 +64,9 @@ const AddPhoto = () => {
 		}
 	};
 
-	const handleFileChange = (files) => {
+	const handleFileChange = async (files) => {
 		let targetFile = files[0];
-
+		console.log(targetFile);
 		if (targetFile) {
 			if (targetFile.size > 50000000) {
 				setErrors({
@@ -49,22 +84,31 @@ const AddPhoto = () => {
 					fileError: '',
 				});
 				setSelectedFile(targetFile);
+				await handleFileUpload(targetFile);
 			}
 		}
 	};
-	console.log(inputRef);
 	const handleAddPhotoClick = (e) => {
-		e.preventDefault();
-		console.log('clicked');
 		if (inputRef.current) {
 			inputRef.current.click();
 		}
 	};
 
 	return (
-		<AddPhotoDiv onClick={(e) => handleAddPhotoClick(e)} src={AddImageIcon}>
-			<HiddenFileInput type={'file'} ref={inputRef} />
-		</AddPhotoDiv>
+		<>
+			{}
+			<AddPhotoDiv
+				onClick={(e) => handleAddPhotoClick(e)}
+				src={profile.pictures[index]?.url || AddImageIcon}
+				size={profile.pictures[index]?.url ? 'cover' : '50px auto'}
+			>
+				<HiddenFileInput
+					type={'file'}
+					onChange={(e) => handleFileChange(e.target.files)}
+					ref={inputRef}
+				/>
+			</AddPhotoDiv>
+		</>
 	);
 };
 

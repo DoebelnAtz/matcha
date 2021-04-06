@@ -13,8 +13,10 @@ const ProfilePhotos = () => {
 
 	const renderPhotos = () => {
 		if (profile) {
-			return profile.pictures.map((pic) => {
-				return <ProfilePhoto key={pic.url} picture={pic} />;
+			return profile.pictures.map((pic, index) => {
+				return (
+					<AddPhoto key={pic.url} profile={profile} index={index} />
+				);
 			});
 		}
 	};
@@ -22,7 +24,13 @@ const ProfilePhotos = () => {
 		<ProfilePhotosDiv>
 			<ProfilePhotosContainer>
 				{!isLoading && renderPhotos()}
-				<AddPhoto src={AddImageIcon} />
+				{!isLoading && (
+					<AddPhoto
+						setProfile={setProfile}
+						profile={profile}
+						index={profile.pictures.length}
+					/>
+				)}
 			</ProfilePhotosContainer>
 		</ProfilePhotosDiv>
 	);

@@ -37,6 +37,18 @@ const sendUploadToGCS = (req, res, next) => {
 	blobStream.end(req.file.buffer);
 };
 
+const deleteFileFromGCS = (req, res, next) => {
+	if (!req.filename) {
+		return next();
+	}
+	const bucketName = `matcha-pictures`;
+	const bucket = storage().bucket(bucketName);
+	const gcsFileName = `${req.decoded.u_id}/${req.file.originalname}`;
+	const file = bucket.file(gcsFileName);
+	file.delete().then(() => next());
+};
+
 module.exports = {
 	sendUploadToGCS,
+	deleteFileFromGCS,
 };

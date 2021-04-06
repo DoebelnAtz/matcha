@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const { handleError } = require('./middleware/error');
 require('dotenv').config({ path: __dirname + '/.env' });
@@ -10,8 +11,9 @@ const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRouter');
 const imageRouter = require('./routes/imageRouter');
 const setup = require('./db/setup/index');
-app.use(cors());
 
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api', logIncoming);
 app.use('/api/auth', authRouter);

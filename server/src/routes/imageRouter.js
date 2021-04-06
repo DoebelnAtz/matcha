@@ -1,3 +1,5 @@
+import { deleteFileFromGCS } from '../middleware/images';
+
 const express = require('express');
 const imageControllers = require('../controllers/imageControllers');
 const { sendUploadToGCS } = require('../middleware/images');
@@ -16,5 +18,7 @@ imageRouter.post(
 	sendUploadToGCS,
 	imageControllers.uploadImage,
 );
+
+imageRouter.delete('/delete', deleteFileFromGCS, imageControllers.deleteImage);
 
 module.exports = imageRouter;
