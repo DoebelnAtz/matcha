@@ -16,9 +16,6 @@ function App() {
 	return (
 		<AppDiv id={'App'}>
 			<Switch>
-				<Route exact path={'/'}>
-					<Home />
-				</Route>
 				<Route exact path={'/auth/login'}>
 					<LogIn />
 				</Route>
@@ -27,6 +24,9 @@ function App() {
 				</Route>
 				<Route exact path={'/auth/verify/:uid'}>
 					<Verify />
+				</Route>
+				<Route path={'/'}>
+					<Home />
 				</Route>
 			</Switch>
 		</AppDiv>

@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-	FeedBlurredBottom,
-	FeedBlurredTop,
-	FeedBlurredTopCutout,
-	FeedControls,
-	FeedDiv,
-	FeedTopNav,
-	OverlayImage,
-} from './styles';
+import { FeedDiv } from './styles';
 import { useFeed, useGet } from '../../../Hooks';
 import FeedCard from './FeedCard';
 // num of profiles left before we get next batch
@@ -47,13 +39,7 @@ const Feed = () => {
 			});
 		}
 	};
-	return (
-		<FeedDiv id={'Feed'}>
-			{renderFeed()}
-			<FeedBlurredTop />
-			<FeedBlurredBottom />
-		</FeedDiv>
-	);
+	return <FeedDiv id={'Feed'}>{renderFeed()}</FeedDiv>;
 };
 
 export default Feed;

@@ -18,7 +18,7 @@ const palette = {
 	primary700: `#023164`,
 	primary900: `#000A14`,
 	gray100: `#FCFCFC`,
-	gray200: `#D6D6D6`,
+	gray200: `#E6E6E6`,
 	gray300: `#B8B8B8`,
 	gray400: `#A3A3A3`,
 	gray500: `#8F8F8F`,

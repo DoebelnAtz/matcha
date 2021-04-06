@@ -2,7 +2,15 @@ import React from 'react';
 import { useGet, useRedirect } from '../../Hooks';
 import { getLocalAuth } from '../../Utils';
 import Feed from './Feed';
-import { HomeDiv } from './styles';
+import {
+	HomeBottomNav,
+	HomeDiv,
+	HomeTopNav,
+	HomeContainerDiv,
+	ViewContainerDiv,
+} from './styles';
+import { Switch, Route } from 'react-router-dom';
+import Profile from './Profile';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -12,7 +20,20 @@ const Home = () => {
 	);
 	return (
 		<HomeDiv>
-			<Feed />
+			<HomeContainerDiv>
+				<ViewContainerDiv>
+					<Switch>
+						<Route exact path={'/'}>
+							<Feed />
+						</Route>
+						<Route exact path={'/profile'}>
+							<Profile />
+						</Route>
+					</Switch>
+				</ViewContainerDiv>
+				<HomeTopNav />
+				<HomeBottomNav />
+			</HomeContainerDiv>
 		</HomeDiv>
 	);
 };

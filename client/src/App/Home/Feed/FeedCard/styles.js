@@ -4,8 +4,8 @@ import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
 	width: calc(100% - ${units.mm} * 2);
-	height: calc(100% - 100px - 80px - ${units.mm});
-	margin: calc(80px + ${units.mm}) ${units.mm} 0 ${units.mm};
+	height: calc(90% - ${units.mm});
+	margin: calc(${units.mm}) ${units.mm} 0 ${units.mm};
 	position: absolute;
 	top: 0;
 	display: flex;
@@ -16,8 +16,6 @@ export const FeedCardDiv = styled(animated.div)`
 	will-change: transform;
 	z-index: ${(props) => 50 - (props.index - props.page)};
 `;
-
-const profilePicSize = '400px';
 
 export const ProfilePictureDiv = styled.div`
 	width: 100%;
@@ -37,13 +35,14 @@ export const FeedCardContentDiv = styled.div`
 	flex-shrink: 0;
 	width: calc(100% - ${units.pm} * 2 - ${units.ml} * 2);
 	padding: ${units.pm};
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: rgba(255, 255, 255, 0.55);
 	border-radius: ${units.rl};
 	flex-direction: column;
 	position: relative;
 	bottom: 65px;
 	z-index: 51;
-	backdrop-filter: blur(20px) saturate(130%) contrast(160%);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(15px) saturate(160%) contrast(120%);
 `;
 
 export const FeedCardNameDiv = styled.div`
