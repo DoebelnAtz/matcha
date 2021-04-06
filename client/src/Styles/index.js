@@ -10,16 +10,16 @@ export const colorAdjust = {
 };
 
 const palette = {
-	primary100: `#EBF4FF`,
-	primary200: `#9BCAFD`,
-	primary300: `#4Ba0FB`,
-	primary400: `#0F81FA`,
-	primary500: `#0459B4`,
-	primary700: `#023164`,
-	primary900: `#000A14`,
+	primary100: `#FDEDED`,
+	primary200: `#f3A5A7`,
+	primary300: `#EC6F73`,
+	primary400: `#E3262D`,
+	primary500: `#B5171D`,
+	primary700: `#6C0E11`,
+	primary900: `#240506`,
 	gray100: `#FCFCFC`,
 	gray200: `#E6E6E6`,
-	gray300: `#B8B8B8`,
+	gray300: `#D8D8D8`,
 	gray400: `#A3A3A3`,
 	gray500: `#8F8F8F`,
 	gray700: `#474747`,
@@ -40,7 +40,7 @@ export const color = {
 	secondaryShade: colorAdjust.darken('#FF684F', 0.1),
 	tertiary: '#FFE8D8',
 	tertiaryShade: colorAdjust.darken('#FFE8D8', 0.1),
-	text: palette.gray900,
+	text: palette.primary900,
 	gray100: palette.gray100,
 	gray200: palette.gray200,
 	gray300: palette.gray300,
@@ -50,7 +50,7 @@ export const color = {
 };
 
 export const units = {
-	ms: '10px',
+	ms: '12px',
 	mm: '16px',
 	ml: '24px',
 	rs: '4px',

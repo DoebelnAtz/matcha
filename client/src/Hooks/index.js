@@ -146,6 +146,7 @@ export function useFeed(url, variables = {}, conditional = true) {
 
 export function useGet(url, variables = {}, conditional = true) {
 	const [data, setData] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 	const resp = useRef(null);
 	const history = useHistory();
 	const mounted = useMounted();
@@ -153,10 +154,14 @@ export function useGet(url, variables = {}, conditional = true) {
 
 	useEffect(() => {
 		async function request() {
+			if (!isLoading) {
+				setIsLoading(true);
+			}
 			try {
 				resp.current = await api.get(url, variables);
 				if (mounted.current) {
 					setData(resp.current);
+					setIsLoading(false);
 				}
 			} catch (e) {
 				if (!e.response) {
@@ -172,5 +177,5 @@ export function useGet(url, variables = {}, conditional = true) {
 		}
 		if (conditional && mounted.current) request();
 	}, [url, conditional, propsVariablesMemoized]);
-	return [data, setData];
+	return [data, setData, isLoading];
 }

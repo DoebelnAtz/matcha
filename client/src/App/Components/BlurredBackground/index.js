@@ -2,10 +2,14 @@ import React from 'react';
 import { Blurhash } from 'react-blurhash';
 import { BlurredBackgroundDiv } from './styles';
 
-const BlurredBackground = ({ hash }) => {
+const BlurredBackground = ({ hash, height, width }) => {
 	return (
 		<BlurredBackgroundDiv id={'blurred-background'}>
-			<Blurhash hash={hash} width={'100%'} height={'100%'} />
+			<Blurhash
+				hash={hash}
+				width={width || '100%'}
+				height={height || '100%'}
+			/>
 		</BlurredBackgroundDiv>
 	);
 };

@@ -11,7 +11,7 @@ import {
 import Picture from '../../../Components/Picture';
 import { useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import BlurredBackground from './BlurredBackground';
+import BlurredBackground from '../../../Components/BlurredBackground';
 import { capitalizeFirst } from '../../../../Utils';
 
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
@@ -82,11 +82,6 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 							{capitalizeFirst(profile.name)}
 						</FeedCardNameSpan>
 					</FeedCardNameDiv>
-					{/*<FeedCardBioDiv>*/}
-					{/*	<FeedCardBioParagraph>*/}
-					{/*		{profile.bio}*/}
-					{/*	</FeedCardBioParagraph>*/}
-					{/*</FeedCardBioDiv>*/}
 				</FeedCardContentDiv>
 			</FeedCardDiv>
 		</>

@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './Profile';
+import BottomNav from './BottomNav';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -32,7 +33,9 @@ const Home = () => {
 					</Switch>
 				</ViewContainerDiv>
 				<HomeTopNav />
-				<HomeBottomNav />
+				<HomeBottomNav>
+					<BottomNav />
+				</HomeBottomNav>
 			</HomeContainerDiv>
 		</HomeDiv>
 	);

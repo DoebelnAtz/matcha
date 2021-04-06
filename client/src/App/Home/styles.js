@@ -23,15 +23,21 @@ export const HomeContainerDiv = styled.div`
 	display: flex;
 	position: relative;
 `;
+
+const topNavSize = '80px';
+const bottomNavSize = '80px';
+
 export const ViewContainerDiv = styled.div`
 	width: 100%;
-	height: calc(100% - 80px - 100px);
+	height: calc(
+		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
+	);
 	margin: auto;
-	background-color: red;
+	background-color: ${color.gray300};
 `;
 
 export const HomeTopNav = styled.div`
-	height: 80px;
+	height: ${topNavSize};
 	width: calc(100% - ${units.mm} * 2);
 	margin: 0 ${units.mm};
 	background-color: ${color.gray200};
@@ -42,7 +48,7 @@ export const HomeTopNav = styled.div`
 `;
 
 export const HomeBottomNav = styled.div`
-	height: 100px;
+	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
 	width: 100%;
 	background-color: ${color.gray200};
 	position: absolute;
