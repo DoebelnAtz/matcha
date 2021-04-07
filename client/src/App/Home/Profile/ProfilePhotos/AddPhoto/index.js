@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { AddPhotoDiv, HiddenFileInput } from './styles';
+import { AddPhotoDiv, AddPhotoIcon, HiddenFileInput } from './styles';
 import AddImageIcon from '../../../../../Assets/icons/add.svg';
 import { encode } from 'blurhash';
 import api from '../../../../../Api';
+import { Rings } from 'svg-loaders-react';
+import { color } from '../../../../../Styles';
 
 const acceptedTypes = ['image/jpeg', 'image/png'];
 
 const AddPhoto = ({ profile, setProfile, index }) => {
 	const inputRef = useRef(null);
+	const [uploading, setUploading] = useState(false);
 	const [selectedFile, setSelectedFile] = useState();
 	const [errors, setErrors] = useState({
 		fileError: '',
@@ -44,7 +47,7 @@ const AddPhoto = ({ profile, setProfile, index }) => {
 
 	const handleFileUpload = async (file) => {
 		const data = new FormData();
-
+		if (!uploading) setUploading(true);
 		if (!!file && file.size < 50000000) {
 			const hash = await encodeImageToBlurhash(file);
 			console.log(hash);
@@ -54,12 +57,15 @@ const AddPhoto = ({ profile, setProfile, index }) => {
 			try {
 				let resp = await api.post(`/images/upload`, data);
 				setProfile({ ...profile, pictures: resp.pics });
+				setUploading(false);
 				return true;
 			} catch (e) {
 				console.log(e);
+				setUploading(false);
 				return false;
 			}
 		} else {
+			setUploading(false);
 			return false;
 		}
 	};
@@ -97,10 +103,14 @@ const AddPhoto = ({ profile, setProfile, index }) => {
 	return (
 		<>
 			{}
-			<AddPhotoDiv
-				onClick={(e) => handleAddPhotoClick(e)}
-				src={AddImageIcon}
-			>
+			<AddPhotoDiv onClick={(e) => handleAddPhotoClick(e)}>
+				{uploading ? (
+					<AddPhotoIcon>
+						<Rings stroke={color.primary} />
+					</AddPhotoIcon>
+				) : (
+					<AddPhotoIcon src={AddImageIcon} />
+				)}
 				<HiddenFileInput
 					type={'file'}
 					onChange={(e) => handleFileChange(e.target.files)}

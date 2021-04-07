@@ -20,7 +20,11 @@ const uploadImage = catchErrors(async (req, res) => {
 		pics = [];
 	}
 	console.log(pics);
-	pics.push({ url: req.publicUrl, hash: req.body.hash });
+	pics.push({
+		url: req.publicUrl,
+		hash: req.body.hash,
+		filename: req.file.originalname,
+	});
 	await query(
 		`
 		UPDATE users SET pictures = $1 WHERE u_id = $2
