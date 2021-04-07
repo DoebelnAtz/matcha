@@ -34,6 +34,7 @@ const palette = {
 };
 
 export const color = {
+	...palette,
 	primary: palette.primary500,
 	primaryShade: palette.primary700,
 	secondary: '#FF684F',
@@ -41,12 +42,6 @@ export const color = {
 	tertiary: '#FFE8D8',
 	tertiaryShade: colorAdjust.darken('#FFE8D8', 0.1),
 	text: palette.primary900,
-	gray100: palette.gray100,
-	gray200: palette.gray200,
-	gray300: palette.gray300,
-	gray400: palette.gray400,
-	gray500: palette.gray500,
-	gray600: palette.gray700,
 };
 
 export const units = {

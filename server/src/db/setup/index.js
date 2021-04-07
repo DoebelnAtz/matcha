@@ -1,3 +1,4 @@
+const { parseQuery } = require('../../utils');
 const { query } = require('../../db/index.js');
 
 const mockData = async () => {
@@ -84,6 +85,31 @@ const mockData = async () => {
 	// 		INSERT INTO languages (name) VALUES ('swedish');
 	// `);
 };
+
+// const alterUsers = async () => {
+// 	let users = await query(`
+// 	SELECT name, u_id, pictures FROM users;
+// 	`);
+// 	users = parseQuery(users);
+// 	users.forEach((u) => {
+// 		let pics = JSON.parse(u.pictures);
+// 		pics.forEach((pic, index) => {
+// 			const regex = new RegExp(`(?<=matcha-pictures\/${u.u_id}\/).+`);
+// 			let match = regex.exec(pic.url);
+// 			console.log(match);
+// 			pic['filename'] = match[0];
+// 			console.log(pic);
+// 			pics[index] = pic;
+// 		});
+// 		const res = JSON.stringify(pics);
+// 		query(`UPDATE users SET pictures = $1 WHERE u_id = $2`, [
+// 			res,
+// 			u.u_id,
+// 		]).then((res) => {
+// 			console.log(res);
+// 		});
+// 	});
+// };
 
 const setup = async () => {
 	mockData();

@@ -5,6 +5,7 @@ import {
 	AddPhotoDiv,
 	ProfilePhotosContainer,
 	ProfilePhotosDiv,
+	ProfilePhotosPageTitle,
 } from './styles';
 import AddImageIcon from '../../../../Assets/icons/add.svg';
 import AddPhoto from './AddPhoto';
@@ -15,13 +16,19 @@ const ProfilePhotos = () => {
 		if (profile) {
 			return profile.pictures.map((pic, index) => {
 				return (
-					<AddPhoto key={pic.url} profile={profile} index={index} />
+					<ProfilePhoto
+						key={pic.url}
+						profile={profile}
+						setProfile={setProfile}
+						index={index}
+					/>
 				);
 			});
 		}
 	};
 	return (
 		<ProfilePhotosDiv>
+			<ProfilePhotosPageTitle>Photos</ProfilePhotosPageTitle>
 			<ProfilePhotosContainer>
 				{!isLoading && renderPhotos()}
 				{!isLoading && (

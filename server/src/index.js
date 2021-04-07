@@ -13,8 +13,8 @@ const imageRouter = require('./routes/imageRouter');
 const setup = require('./db/setup/index');
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', logIncoming);
 app.use('/api/auth', authRouter);
 app.use('/api', checkToken);

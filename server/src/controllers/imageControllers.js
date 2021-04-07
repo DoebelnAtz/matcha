@@ -45,8 +45,8 @@ const deleteImage = catchErrors(async (req, res) => {
 	} else {
 		pics = [];
 	}
-	console.log(pics);
-	pics.filter((pic) => pic.filename !== req.filename);
+	pics = pics.filter((pic) => pic.filename !== req.body.filename);
+
 	await query(
 		`
 		UPDATE users SET pictures = $1 WHERE u_id = $2

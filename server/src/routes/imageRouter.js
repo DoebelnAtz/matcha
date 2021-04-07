@@ -1,8 +1,6 @@
-import { deleteFileFromGCS } from '../middleware/images';
-
 const express = require('express');
 const imageControllers = require('../controllers/imageControllers');
-const { sendUploadToGCS } = require('../middleware/images');
+const { sendUploadToGCS, deleteFileFromGCS } = require('../middleware/images');
 const imageRouter = express.Router();
 const Multer = require('multer');
 

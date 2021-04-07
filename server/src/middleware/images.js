@@ -38,12 +38,12 @@ const sendUploadToGCS = (req, res, next) => {
 };
 
 const deleteFileFromGCS = (req, res, next) => {
-	if (!req.filename) {
+	if (!req.body.filename) {
 		return next();
 	}
 	const bucketName = `matcha-pictures`;
 	const bucket = storage().bucket(bucketName);
-	const gcsFileName = `${req.decoded.u_id}/${req.file.originalname}`;
+	const gcsFileName = `${req.decoded.u_id}/${req.body.filename}`;
 	const file = bucket.file(gcsFileName);
 	file.delete().then(() => next());
 };

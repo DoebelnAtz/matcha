@@ -99,8 +99,7 @@ const AddPhoto = ({ profile, setProfile, index }) => {
 			{}
 			<AddPhotoDiv
 				onClick={(e) => handleAddPhotoClick(e)}
-				src={profile.pictures[index]?.url || AddImageIcon}
-				size={profile.pictures[index]?.url ? 'cover' : '50px auto'}
+				src={AddImageIcon}
 			>
 				<HiddenFileInput
 					type={'file'}

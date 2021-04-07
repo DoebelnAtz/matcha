@@ -10,7 +10,7 @@ export const AddPhotoDiv = styled.div`
 	${shadows.standOut};
 	background-image: url(${(props) => props.src});
 	background-position: center;
-	background-size: ${(props) => props.size};
+	background-size: 50px auto;
 	background-repeat: no-repeat;
 `;
 

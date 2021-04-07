@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, shadows, units } from '../../../../Styles';
+import { color, font, shadows, units } from '../../../../Styles';
 
 export const ProfilePhotosDiv = styled.div`
 	width: calc(100% - ${units.pm} * 2);
@@ -7,6 +7,11 @@ export const ProfilePhotosDiv = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+`;
+
+export const ProfilePhotosPageTitle = styled.h2`
+	color: ${color.primaryShade};
+	${font.roboto};
 `;
 
 export const ProfilePhotosContainer = styled.div`
