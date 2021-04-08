@@ -1,45 +1,66 @@
 import React from 'react';
-import ProfilePhoto from './ProfilePhoto';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+import ProfilePhoto from './PhotoManager/ProfilePhoto';
 import { useGet } from '../../../../Hooks';
 import {
 	AddPhotoDiv,
+	DraggableDiv,
 	ProfilePhotosContainer,
 	ProfilePhotosDiv,
 	ProfilePhotosPageTitle,
 } from './styles';
 import AddImageIcon from '../../../../Assets/icons/add.svg';
-import AddPhoto from './AddPhoto';
+import AddPhoto from './PhotoManager/AddPhoto';
+import PhotoManager from './PhotoManager';
+import api from '../../../../Api';
+
 const ProfilePhotos = () => {
 	const [profile, setProfile, isLoading] = useGet('/users/me');
 
-	const renderPhotos = () => {
-		if (profile) {
-			return profile.pictures.map((pic, index) => {
-				return (
-					<ProfilePhoto
-						key={pic.url}
-						profile={profile}
-						setProfile={setProfile}
-						index={index}
-					/>
-				);
-			});
+	const updatePictures = async (pictures) => {
+		try {
+			await api.patch('/users/me/pictures', { pictures });
+		} catch (e) {
+			console.log(e);
 		}
 	};
+
+	const reorder = (srcIndex, destIndex) => {
+		const pictures = profile.pictures;
+		const [removed] = pictures.splice(srcIndex, 1);
+		pictures.splice(destIndex, 0, removed);
+
+		return pictures;
+	};
+
+	const onDragEnd = (result) => {
+		// dropped outside the list
+		console.log(result);
+		if (!result.destination) {
+			return;
+		}
+		const srcIndex = result.source.index;
+		const destIndex = result.destination.index;
+		const srcRow = result.source.droppableId;
+		const destRow = result.destination.droppableId;
+		const updatedPictures = reorder(srcIndex, destIndex, srcRow, destRow);
+		updatePictures(updatedPictures);
+	};
+
 	return (
-		<ProfilePhotosDiv>
-			<ProfilePhotosPageTitle>Photos</ProfilePhotosPageTitle>
-			<ProfilePhotosContainer>
-				{!isLoading && renderPhotos()}
+		<DragDropContext onDragEnd={(res) => onDragEnd(res)}>
+			<ProfilePhotosDiv className={'scrollbar-animation'}>
+				<ProfilePhotosPageTitle>Photos</ProfilePhotosPageTitle>
 				{!isLoading && (
-					<AddPhoto
-						setProfile={setProfile}
+					<PhotoManager
+						pictures={profile.pictures}
 						profile={profile}
-						index={profile.pictures.length}
+						setProfile={setProfile}
 					/>
 				)}
-			</ProfilePhotosContainer>
-		</ProfilePhotosDiv>
+			</ProfilePhotosDiv>
+		</DragDropContext>
 	);
 };
 

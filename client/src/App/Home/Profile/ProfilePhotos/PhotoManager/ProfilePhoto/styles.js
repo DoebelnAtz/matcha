@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, cursor, shadows, units } from '../../../../../Styles';
+import { color, cursor, shadows, units } from '../../../../../../Styles';
 
 export const ProfilePhotoDelete = styled.div`
 	background-color: ${color.danger500}77;
@@ -17,12 +17,12 @@ export const ProfilePhotoDelete = styled.div`
 `;
 
 export const ProfilePhotoDiv = styled.div`
-	width: 40%;
-	height: 120px;
+	height: 140px;
+
 	margin-bottom: ${units.mxl};
 	border: 6px solid ${color.gray200};
 	border-radius: ${units.rl};
-	${shadows.standOut};
+	box-shadow: ${shadows.standOut};
 	background-image: url(${(props) => props.src});
 	background-position: center;
 	background-size: cover;

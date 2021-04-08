@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { AddPhotoDiv, AddPhotoIcon, HiddenFileInput } from './styles';
-import AddImageIcon from '../../../../../Assets/icons/add.svg';
+import AddImageIcon from '../../../../../../Assets/icons/add.svg';
 import { encode } from 'blurhash';
-import api from '../../../../../Api';
+import api from '../../../../../../Api';
 import { Rings } from 'svg-loaders-react';
-import { color } from '../../../../../Styles';
+import { color } from '../../../../../../Styles';
 
 const acceptedTypes = ['image/jpeg', 'image/png'];
 

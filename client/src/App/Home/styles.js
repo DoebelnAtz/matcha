@@ -29,9 +29,10 @@ const bottomNavSize = '80px';
 export const ViewContainerDiv = styled.div`
 	width: 100%;
 	height: calc(
-		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
+		100% - ${topNavSize} - ${bottomNavSize} - ${units.mm} * 2 -
+			env(safe-area-inset-bottom)
 	);
-	margin: auto;
+	margin: ${topNavSize} auto auto auto;
 	background-color: ${color.gray300};
 `;
 
@@ -49,7 +50,7 @@ export const HomeTopNav = styled.div`
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
 	width: calc(100% - ${units.pm} * 2);
-	padding: ${units.pm};
+	margin: ${units.mm};
 	background-color: ${color.gray300};
 	position: absolute;
 	backdrop-filter: blur(10px) contrast(80%) saturate(130%);

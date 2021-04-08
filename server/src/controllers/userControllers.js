@@ -35,7 +35,21 @@ const getProfileFeed = catchErrors(async (req, res) => {
 	res.json(profiles);
 }, 'Failed to get profile feed');
 
+const updateProfilePictures = catchErrors(async (req, res) => {
+	const { pictures } = req.body;
+	const u_id = req.decoded.u_id;
+	await query(
+		`
+		UPDATE users SET pictures = $1 WHERE u_id = $2
+	`,
+		[JSON.stringify(pictures), u_id],
+	);
+
+	res.json({ success: true });
+}, 'Failed to update profile pictures');
+
 module.exports = {
 	getMe,
 	getProfileFeed,
+	updateProfilePictures,
 };

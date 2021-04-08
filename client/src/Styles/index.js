@@ -87,12 +87,12 @@ export const font = {
 };
 
 export const shadows = {
-	standOut: css`
-		box-shadow: -4px -4px 14px 4px #ffffff, 4px 4px 14px 4px #00000060;
+	standOut: `
+		-4px -4px 14px 4px #ffffff, 4px 4px 14px 4px #00000060
 	`,
-	concave: css`
-		box-shadow: inset -2px -2px 8px 4px #ffffff,
-			inset 2px 2px 8px 4px #00000060;
+	concave: `
+		inset -2px -2px 8px 2px #ffffff,
+			inset 2px 2px 8px 2px #00000040
 	`,
 };
 

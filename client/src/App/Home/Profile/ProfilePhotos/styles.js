@@ -3,23 +3,16 @@ import { color, font, shadows, units } from '../../../../Styles';
 
 export const ProfilePhotosDiv = styled.div`
 	width: calc(100% - ${units.pm} * 2);
-	padding: ${units.pm};
+	height: calc(100% - ${units.pm} * 2);
+	padding: ${units.pm} calc(${units.pm}) ${units.pm} ${units.pm};
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	overflow: auto;
+	flex-direction: column;
 `;
 
 export const ProfilePhotosPageTitle = styled.h2`
 	color: ${color.primaryShade};
 	${font.roboto};
-`;
-
-export const ProfilePhotosContainer = styled.div`
-	display: flex;
-	width: 100%;
-	margin-top: ${units.ml};
-	flex-wrap: wrap;
-	justify-content: space-between;
 `;
 
 export const AddPhotoDiv = styled.div`
