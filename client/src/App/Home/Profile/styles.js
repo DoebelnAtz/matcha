@@ -37,7 +37,7 @@ export const BlurredBackgroundDiv = styled.div`
 			circle,
 			${color.gray300}22 50%,
 			${color.gray300}66 60%,
-			${color.gray300}ea 70%
+			${color.gray300}ff 70%
 		);
 		backdrop-filter: blur(1px);
 		content: '';
