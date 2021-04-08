@@ -29,11 +29,10 @@ const bottomNavSize = '80px';
 export const ViewContainerDiv = styled.div`
 	width: 100%;
 	height: calc(
-		100% - ${topNavSize} - ${bottomNavSize} - ${units.mm} * 2 -
-			env(safe-area-inset-bottom)
+		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
 	);
 	margin: ${topNavSize} auto auto auto;
-	background-color: ${color.gray300};
+	background-color: ${color.gray400};
 `;
 
 export const HomeTopNav = styled.div`
@@ -49,11 +48,9 @@ export const HomeTopNav = styled.div`
 
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
-	width: calc(100% - ${units.pm} * 2);
-	margin: ${units.mm};
+	width: calc(100%);
 	background-color: ${color.gray300};
 	position: absolute;
-	backdrop-filter: blur(10px) contrast(80%) saturate(130%);
 	bottom: 0;
 	z-index: 51;
 `;

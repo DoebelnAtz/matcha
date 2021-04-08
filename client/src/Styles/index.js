@@ -20,7 +20,7 @@ const palette = {
 	gray100: `#FCFCFC`,
 	gray200: `#E6E6E6`,
 	gray300: `#D8D8D8`,
-	gray400: `#A3A3A3`,
+	gray400: `#C3C3C3`,
 	gray500: `#8F8F8F`,
 	gray700: `#474747`,
 	gray900: `#0A0A0A`,

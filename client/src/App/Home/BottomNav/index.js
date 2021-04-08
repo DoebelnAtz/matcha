@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
 	BottomNavDiv,
+	BottomNavHomeIcon,
+	BottomNavHomeIconContainer,
 	BottomNavIcon,
 	BottomNavIconContainer,
 	BottomNavIconDiv,
+	BottomNavProfileIcon,
+	BottomNavSearchIcon,
 } from './styles';
 import UserIcon from '../../../Assets/icons/user.svg';
 import HomeIcon from '../../../Assets/icons/home.svg';
@@ -24,26 +28,25 @@ const BottomNav = () => {
 
 	console.log(history.location.pathname);
 	return (
-		<BottomNavDiv>
+		<BottomNavDiv id={'nav'}>
 			<BottomNavIconContainer>
-				<BottomNavIconDiv
+				<BottomNavProfileIcon
 					onClick={() => handleNavClick('/profile')}
 					active={location === '/profile'}
-				>
-					<BottomNavIcon src={UserIcon} />
-				</BottomNavIconDiv>
-				<BottomNavIconDiv
-					onClick={() => handleNavClick('/')}
-					active={location === '/'}
-				>
-					<BottomNavIcon src={HomeIcon} />
-				</BottomNavIconDiv>
-				<BottomNavIconDiv
+					src={UserIcon}
+				/>
+				<BottomNavHomeIconContainer>
+					<BottomNavHomeIcon
+						onClick={() => handleNavClick('/')}
+						active={location === '/'}
+						src={HomeIcon}
+					/>
+				</BottomNavHomeIconContainer>
+				<BottomNavSearchIcon
 					onClick={() => handleNavClick('/search')}
 					active={location === '/search'}
-				>
-					<BottomNavIcon src={SearchIcon} />
-				</BottomNavIconDiv>
+					src={SearchIcon}
+				/>
 			</BottomNavIconContainer>
 		</BottomNavDiv>
 	);

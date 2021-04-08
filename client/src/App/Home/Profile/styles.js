@@ -35,9 +35,9 @@ export const BlurredBackgroundDiv = styled.div`
 	&:after {
 		background: radial-gradient(
 			circle,
-			${color.gray300}22 50%,
-			${color.gray300}66 60%,
-			${color.gray300}ff 70%
+			${color.gray400}22 50%,
+			${color.gray400}66 60%,
+			${color.gray400}ff 70%
 		);
 		backdrop-filter: blur(1px);
 		content: '';
@@ -104,7 +104,7 @@ export const ProfilePageOptionButtonDiv = styled.div`
 	padding: ${units.ps};
 	margin: auto;
 	border-radius: 50%;
-	background-color: ${color.gray200};
+	background-color: ${color.gray300};
 	${cursor.clickable};
 	transition: all 0.1s ease-in-out;
 
@@ -121,7 +121,7 @@ export const ProfilePageOptionButtonDiv = styled.div`
 			transform: scale(0.98);
 		}
 	}
-	border: 1px solid ${color.gray200};
+	border: 1px solid ${color.gray300};
 `;
 
 export const ProfilePageButton = styled.div`
