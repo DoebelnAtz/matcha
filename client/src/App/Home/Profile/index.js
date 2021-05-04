@@ -22,6 +22,7 @@ import { useGet } from '../../../Hooks';
 import SettingsIcon from '../../../Assets/icons/settin_gear.svg';
 import LikeIcon from '../../../Assets/icons/heart.svg';
 import PhotosIcon from '../../../Assets/icons/camera.svg';
+import NeomorphicButton from '../../Components/NeomorphicButton';
 
 const Profile = () => {
 	const history = useHistory();
@@ -57,19 +58,17 @@ const Profile = () => {
 						)}
 					</ProfilePageNameDiv>
 					<ProfilePageOptionContainer>
-						<ProfilePageOptionButtonDiv>
+						<NeomorphicButton>
 							<ProfilePageButton src={LikeIcon} />
-						</ProfilePageOptionButtonDiv>
-						<ProfilePageOptionButtonDiv
-							style={{ marginTop: '60px' }}
-						>
+						</NeomorphicButton>
+						<NeomorphicButton style={{ marginTop: '60px' }}>
 							<ProfilePageButton src={SettingsIcon} />
-						</ProfilePageOptionButtonDiv>
-						<ProfilePageOptionButtonDiv
+						</NeomorphicButton>
+						<NeomorphicButton
 							onClick={() => history.push('/profile/photos')}
 						>
 							<ProfilePageButton src={PhotosIcon} />
-						</ProfilePageOptionButtonDiv>
+						</NeomorphicButton>
 					</ProfilePageOptionContainer>
 				</ProfilePageContentContainer>
 			</ProfileContainer>

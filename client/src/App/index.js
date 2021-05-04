@@ -1,16 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-	BrowserRouter,
-	Route,
-	Switch,
-	useLocation,
-	Redirect,
-} from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { AppDiv } from './styles';
 import SignUp from './Auth/Signup';
 import LogIn from './Auth/Login';
 import Home from './Home';
-import { useAuth, useGet } from '../Hooks';
 import Verify from './Auth/Verify';
 function App() {
 	return (

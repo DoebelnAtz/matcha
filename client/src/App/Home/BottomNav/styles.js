@@ -54,6 +54,7 @@ export const BottomNavHomeIconContainer = styled.div`
 	height: 80px;
 	flex-shrink: 0;
 	display: flex;
+	z-index: 3;
 	border-radius: 40px;
 	background-color: ${color.gray400};
 	position: absolute;
@@ -61,21 +62,14 @@ export const BottomNavHomeIconContainer = styled.div`
 `;
 
 export const BottomNavHomeIcon = styled.div`
-	width: 60px;
-	height: 60px;
-	margin: auto;
-	background-color: ${color.gray200};
+	width: 40px;
+	height: 40px;
 	border-radius: 30px;
 	${cursor.clickable};
-	box-shadow: ${shadows.standOut};
 	background-image: url(${(props) => props.src});
 	background-position: center;
 	background-size: 44px;
 	background-repeat: no-repeat;
-	transition: all 0.15s ease-in-out;
-	&:hover {
-		box-shadow: ${shadows.standOut}, ${shadows.concave};
-	}
 `;
 
 const navColor = color.gray200;
@@ -91,6 +85,8 @@ export const BottomNavProfileIcon = styled.div`
 	background-image: url(${(props) => props.src});
 	background-position: 40% 50%;
 	background-size: 34px;
+	z-index: 2;
+	position: relative;
 	background-repeat: no-repeat;
 	&:hover {
 		background-color: ${color.gray300};
@@ -119,7 +115,7 @@ export const BottomNavSearchIcon = styled.div`
 	background-color: ${navColor};
 	border-left: 2px solid ${color.gray400};
 	transition: all 0.1s ease-in-out;
-
+	${cursor.clickable};
 	background-image: url(${(props) => props.src});
 	background-position: 60% 50%;
 	background-size: 34px;

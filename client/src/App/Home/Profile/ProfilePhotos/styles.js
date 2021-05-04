@@ -12,6 +12,7 @@ export const ProfilePhotosDiv = styled.div`
 
 export const ProfilePhotosPageTitle = styled.h2`
 	color: ${color.primaryShade};
+	margin: ${units.ml};
 	${font.roboto};
 `;
 
