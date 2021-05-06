@@ -3,9 +3,9 @@ import { color, font, units } from '../../../../Styles';
 import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
-	width: calc(100% - ${units.mm} * 2);
-	height: calc(90% - ${units.mm});
-	margin: calc(${units.mm}) ${units.mm} 0 ${units.mm};
+	width: calc(100% - ${units.ml} * 2);
+	height: calc(90% - ${units.ml});
+	margin: calc(${units.ml}) ${units.ml} 0 ${units.ml};
 	position: absolute;
 	top: 0;
 	display: flex;

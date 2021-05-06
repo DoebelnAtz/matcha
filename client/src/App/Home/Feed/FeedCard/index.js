@@ -36,8 +36,8 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			direction: [xDir],
 			vxvy: [vx],
 		}) => {
-			const velocity = Math.abs(vx);
-			const trigger = velocity > 0.3; // If you flick hard enough it should trigger the card to fly out
+			const velocity = Math.min(0.25, Math.abs(vx));
+			const trigger = velocity > 0.2; // If you flick hard enough it should trigger the card to fly out
 			const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
 			let isGone = false;
 			if (!down && trigger) {
@@ -45,7 +45,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				setPage(page + 1);
 			}
 			const x = isGone ? (300 + window.innerWidth) * dir : down ? mx : 0; // When a card is gone it flys out left or right, otherwise goes back to zero
-			const y = down ? my / 2 : 0; // When a card is gone it flys out left or right, otherwise goes back to zero
+			const y = down ? my / 2 : 0; // When a card is gone it flies out left or right, otherwise goes back to zero
 			const rDragging =
 				((x / 100) * (window.innerHeight / 2 - oy)) /
 				(100 - (velocity + 1));
@@ -58,7 +58,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			// console.log(Math.floor(x), Math.floor(y), r, ox, oy);
 
 			set({ xy: [x + xCorrection, y + yCorrection, r] });
-		},
+		}, {bounds: {top: -50, bottom: 50}}
 	);
 	return (
 		<>

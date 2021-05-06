@@ -29,9 +29,9 @@ const bottomNavSize = '80px';
 export const ViewContainerDiv = styled.div`
 	width: 100%;
 	height: calc(
-		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
+		100% -  ${bottomNavSize} - env(safe-area-inset-bottom)
 	);
-	margin: ${topNavSize} auto auto auto;
+	margin: 0 auto auto auto;
 	background-color: ${color.gray400};
 `;
 

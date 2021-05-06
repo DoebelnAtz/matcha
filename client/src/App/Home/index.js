@@ -36,7 +36,6 @@ const Home = () => {
 						</Route>
 					</Switch>
 				</ViewContainerDiv>
-				<HomeTopNav />
 				<HomeBottomNav>
 					<BottomNav />
 				</HomeBottomNav>
