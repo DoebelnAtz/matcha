@@ -18,12 +18,12 @@ const palette = {
 	primary700: `#6C0E11`,
 	primary900: `#240506`,
 	gray100: `#FCFCFC`,
-	gray200: `#E6E6E6`,
-	gray300: `#D8D8D8`,
-	gray400: `#C3C3C3`,
-	gray500: `#8F8F8F`,
-	gray700: `#474747`,
-	gray900: `#0A0A0A`,
+	gray200: `#f0f0f0`,
+	gray300: `#e6e6e6`,
+	gray400: `#dcdcdc`,
+	gray500: `#bebebe`,
+	gray700: `#c8c8c8`,
+	gray900: `#969696`,
 	danger100: `#FDECEC`,
 	danger200: `#F9B4B5`,
 	danger300: `#F68E90`,
@@ -46,12 +46,12 @@ export const color = {
 
 export const units = {
 	ms: '12px',
-	mm: '16px',
-	ml: '24px',
+	mm: '18px',
+	ml: '28px',
 	mxl: '34px',
-	rs: '4px',
-	rm: '8px',
-	rl: '14px',
+	rs: '8px',
+	rm: '14px',
+	rl: '28px',
 	ps: '10px',
 	pm: '16px',
 	pl: '24px',
@@ -60,8 +60,8 @@ export const units = {
 };
 
 export const font = {
-	roboto: css`
-		font-family: 'Roboto', sans-serif;
+	normal: css`
+      font-family: 'Quicksand', sans-serif;
 	`,
 	title: css`
 		font-size: 36px;
@@ -185,7 +185,7 @@ export const components = {
 		}
 	`,
 	labeledInput: css`
-		${font.roboto};
+		${font.normal};
 		font-size: 20px;
 		color: ${color.primary};
 		display: flex;
@@ -210,7 +210,7 @@ export const components = {
 	radioInput: css``,
 	labeledRadioInput: css``,
 	labeledTextArea: css`
-		${font.roboto};
+		${font.normal};
 		font-size: 20px;
 		color: ${color.primary};
 		display: flex;
@@ -220,7 +220,7 @@ export const components = {
 			font-size: 16px;
 			border-radius: 0;
 			resize: vertical;
-			${font.roboto};
+			${font.normal};
 			box-shadow: none;
 			background-color: ${color.tertiary};
 			border: none;
@@ -239,7 +239,7 @@ export const components = {
 		text-transform: uppercase;
 		height: 30px;
 		font-size: 20px;
-		${font.roboto};
+		${font.normal};
 		line-height: 18px;
 		background-color: ${color.primary};
 		${cursor.clickable};

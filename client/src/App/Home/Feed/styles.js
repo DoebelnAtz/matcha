@@ -7,5 +7,6 @@ export const FeedDiv = styled.div`
 	overflow: hidden;
 	flex-direction: column;
 	display: flex;
+  z-index: 10;
 	position: relative;
 `;

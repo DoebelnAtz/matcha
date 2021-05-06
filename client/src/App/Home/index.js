@@ -13,6 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 import Profile from './Profile';
 import BottomNav from './BottomNav';
 import ProfilePhotos from './Profile/ProfilePhotos';
+import TopNav from './TopNav';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -39,6 +40,9 @@ const Home = () => {
 				<HomeBottomNav>
 					<BottomNav />
 				</HomeBottomNav>
+				<HomeTopNav>
+					<TopNav/>
+				</HomeTopNav>
 			</HomeContainerDiv>
 		</HomeDiv>
 	);

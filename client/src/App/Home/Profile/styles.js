@@ -22,7 +22,7 @@ export const ProfilePictureContainer = styled.div`
 	width: 100%;
 	height: calc((${profilePicSize} + ${frameSize}) / 2);
 	border-bottom: 2px solid ${color.primary};
-	margin-top: ${units.ml};
+	margin-top: ${units.mxl};
 	display: flex;
 `;
 
@@ -78,7 +78,7 @@ export const ProfilePictureImage = styled.div`
 export const ProfilePageContentContainer = styled.div`
 	width: 100%;
 	display: flex;
-	margin-top: calc((${profilePicSize} + ${frameSize}) / 2 + ${units.ml});
+	margin-top: calc((${profilePicSize} + ${frameSize}) / 2 + ${units.mxl});
 	flex-direction: column;
 `;
 
@@ -89,7 +89,7 @@ export const ProfilePageNameDiv = styled.div`
 `;
 
 export const ProfilePageNameSpan = styled.span`
-	${font.roboto};
+	${font.normal};
 	font-size: 32px;
 	color: ${color.text};
 `;
@@ -97,7 +97,7 @@ export const ProfilePageNameSpan = styled.span`
 export const ProfilePageOptionContainer = styled.div`
 	display: flex;
 	width: 100%;
-	margin-top: ${units.ml};
+	margin-top: ${units.mxl};
 `;
 
 export const ProfilePageOptionButtonDiv = styled.div`

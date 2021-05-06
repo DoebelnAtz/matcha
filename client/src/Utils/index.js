@@ -1,6 +1,5 @@
 import queryString from 'query-string';
-import { useRef } from 'react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { isEqual } from 'lodash';
 import { Redirect } from 'react-router-dom';
 
@@ -88,3 +87,10 @@ export const calculateTimeSince = (isoString) => {
 		' ago'
 	);
 };
+
+export const calculateAge = (dob) => {
+	const date1 = new Date(dob);
+	const date2 = new Date();
+	const diffTime = Math.abs(date2 - date1);
+	return Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7 * 52));
+}

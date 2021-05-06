@@ -4,7 +4,7 @@ import { color, cursor, shadows, units } from '../../../Styles';
 export const BottomNavDiv = styled.div`
 	width: 100%;
 	height: 100%;
-	background-color: ${color.gray400};
+	background-color: transparent;
 	display: flex;
 	padding-bottom: calc(${units.pm} + env(safe-area-inset-bottom));
 `;
@@ -14,6 +14,7 @@ export const BottomNavIconContainer = styled.div`
 	display: flex;
 	justify-content: center;
 `;
+const radiusSize = `32px`
 
 export const BottomNavIconDiv = styled.div`
 	padding: 0 ${units.pl};
@@ -56,7 +57,7 @@ export const BottomNavHomeIconContainer = styled.div`
 	display: flex;
 	z-index: 3;
 	border-radius: 40px;
-	background-color: ${color.gray400};
+	background-color: ${color.gray300};
 	position: absolute;
 	bottom: 10px;
 `;
@@ -72,14 +73,14 @@ export const BottomNavHomeIcon = styled.div`
 	background-repeat: no-repeat;
 `;
 
-const navColor = color.gray200;
+const navColor = color.gray100;
 
 export const BottomNavProfileIcon = styled.div`
 	width: 50%;
 	height: calc(50px + env(safe-area-inset-bottom));
 	margin-top: auto;
 	background-color: ${navColor};
-	border-right: 2px solid ${color.gray400};
+	border-right: 2px solid ${color.gray200};
 	${cursor.clickable};
 	transition: all 0.1s ease-in-out;
 	background-image: url(${(props) => props.src});
@@ -89,9 +90,9 @@ export const BottomNavProfileIcon = styled.div`
 	position: relative;
 	background-repeat: no-repeat;
 	&:hover {
-		background-color: ${color.gray300};
+		background-color: ${color.gray200};
 		&::before {
-			box-shadow: 0 25px 0 0 ${color.gray300}; /* This is where the magic happens! */
+			box-shadow: 0 ${radiusSize} 0 0 ${color.gray200}; /* This is where the magic happens! */
 		}
 	}
 	&::before {
@@ -101,10 +102,10 @@ export const BottomNavProfileIcon = styled.div`
 
 		background-color: transparent;
 		bottom: 50px;
-		height: 50px;
-		width: 25px;
-		border-bottom-left-radius: 25px;
-		box-shadow: 0 25px 0 0 ${navColor}; /* This is where the magic happens! */
+		height: calc(${radiusSize} * 2);
+		width: ${radiusSize};
+		border-bottom-left-radius: ${radiusSize};
+		box-shadow: 0 ${radiusSize} 0 0 ${navColor}; /* This is where the magic happens! */
 	}
 `;
 
@@ -113,7 +114,7 @@ export const BottomNavSearchIcon = styled.div`
 	height: calc(50px + env(safe-area-inset-bottom));
 	margin-top: auto;
 	background-color: ${navColor};
-	border-left: 2px solid ${color.gray400};
+	border-left: 2px solid ${color.gray200};
 	transition: all 0.1s ease-in-out;
 	${cursor.clickable};
 	background-image: url(${(props) => props.src});
@@ -121,9 +122,9 @@ export const BottomNavSearchIcon = styled.div`
 	background-size: 34px;
 	background-repeat: no-repeat;
 	&:hover {
-		background-color: ${color.gray300};
+		background-color: ${color.gray200};
 		&::after {
-			box-shadow: 0 25px 0 0 ${color.gray300}; /* This is where the magic happens! */
+			box-shadow: 0 25px 0 0 ${color.gray200}; /* This is where the magic happens! */
 		}
 	}
 	&::after {
@@ -134,10 +135,10 @@ export const BottomNavSearchIcon = styled.div`
 		background-color: transparent;
 		bottom: 50px;
 		right: 0;
-		height: 50px;
-		width: 25px;
-		border-bottom-right-radius: 25px;
-		box-shadow: 0 25px 0 0 ${navColor}; /* This is where the magic happens! */
+		height: calc(${radiusSize} * 2);
+		width: ${radiusSize};
+		border-bottom-right-radius: ${radiusSize};
+		box-shadow: 0 ${radiusSize} 0 0 ${navColor}; /* This is where the magic happens! */
 	}
 `;
 

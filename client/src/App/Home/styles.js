@@ -16,30 +16,34 @@ export const HomeContainerDiv = styled.div`
 	max-width: 375px;
 	max-height: 812px;
 	margin: auto;
-	overflow: hidden;
-	background-color: ${color.gray200};
+  	border-radius: 20px;
+
+  	overflow: hidden;
+	background-color: ${color.gray300};
 	display: flex;
 	position: relative;
 	flex-shrink: 0;
 `;
 
-const topNavSize = '80px';
+const topNavSize = '60px';
 const bottomNavSize = '80px';
 
 export const ViewContainerDiv = styled.div`
 	width: 100%;
 	height: calc(
-		100% -  ${bottomNavSize} - env(safe-area-inset-bottom)
+		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
 	);
-	margin: 0 auto auto auto;
-	background-color: ${color.gray400};
+  position: relative;
+  
+	margin: ${topNavSize} auto ${bottomNavSize} auto;
+	background-color: ${color.gray300};
 `;
 
 export const HomeTopNav = styled.div`
 	height: ${topNavSize};
-	width: calc(100% - ${units.mm} * 2);
-	margin: 0 ${units.mm};
-	background-color: ${color.gray200};
+	width: calc(100%);
+	margin: 0;
+	background-color: ${color.gray100};
 	position: absolute;
 	backdrop-filter: blur(10px) contrast(80%) saturate(130%);
 	top: 0;
@@ -49,8 +53,8 @@ export const HomeTopNav = styled.div`
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
 	width: calc(100%);
-	background-color: ${color.gray300};
+	background-color: transparent;
 	position: absolute;
 	bottom: 0;
-	z-index: 51;
+	z-index: 9;
 `;

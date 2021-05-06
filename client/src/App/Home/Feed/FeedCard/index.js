@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+	FeedCardAgeSpan,
 	FeedCardBioDiv,
 	FeedCardBioParagraph,
 	FeedCardContentDiv,
@@ -12,7 +13,7 @@ import Picture from '../../../Components/Picture';
 import { useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import BlurredBackground from '../../../Components/BlurredBackground';
-import { capitalizeFirst } from '../../../../Utils';
+import { calculateAge, capitalizeFirst } from '../../../../Utils';
 
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (x, y, r) => `
@@ -58,7 +59,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			// console.log(Math.floor(x), Math.floor(y), r, ox, oy);
 
 			set({ xy: [x + xCorrection, y + yCorrection, r] });
-		}, {bounds: {top: -50, bottom: 50}}
+		}, {bounds: {top: -50, bottom: 20}}
 	);
 	return (
 		<>
@@ -75,14 +76,18 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			>
 				<ProfilePictureDiv id={'profile-picture'}>
 					<Picture pic={profile.pictures[0]} />
-				</ProfilePictureDiv>
 				<FeedCardContentDiv id={'content'}>
 					<FeedCardNameDiv>
 						<FeedCardNameSpan>
 							{capitalizeFirst(profile.name)}
 						</FeedCardNameSpan>
+
 					</FeedCardNameDiv>
+						<FeedCardAgeSpan>
+						{calculateAge(profile.dob)}
+						</FeedCardAgeSpan>
 				</FeedCardContentDiv>
+				</ProfilePictureDiv>
 			</FeedCardDiv>
 		</>
 	);

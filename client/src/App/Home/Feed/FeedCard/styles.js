@@ -3,9 +3,9 @@ import { color, font, units } from '../../../../Styles';
 import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
-	width: calc(100% - ${units.ml} * 2);
-	height: calc(90% - ${units.ml});
-	margin: calc(${units.ml}) ${units.ml} 0 ${units.ml};
+	width: calc(100% - ${units.mm} * 2);
+	height: calc(100% - ${units.mm}  - ${units.mxl});
+	margin: ${units.mm} ${units.ml} ${units.mxl} ${units.mm};
 	position: absolute;
 	top: 0;
 	display: flex;
@@ -23,37 +23,53 @@ export const ProfilePictureDiv = styled.div`
 	position: relative;
 	overflow: hidden;
 	z-index: 50;
-	border-radius: ${units.rl};
+	border-radius: ${units.rm};
 
-	flex-shrink: 0;
 `;
+
+const cardHeight = '70px'
 
 export const FeedCardContentDiv = styled.div`
 	display: flex;
-	margin: 0 auto;
-	height: 50px;
+	margin: auto;
+	height: ${cardHeight};
 	flex-shrink: 0;
-	width: calc(100% - ${units.pm} * 2 - ${units.ml} * 2);
+	width: calc(100% - ${units.pm} * 2 - ${units.ms} * 2);
 	padding: ${units.pm};
-	background-color: rgba(255, 255, 255, 0.55);
-	border-radius: ${units.rl};
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: ${units.rs};
 	flex-direction: column;
 	position: relative;
-	bottom: 65px;
-	z-index: 51;
+  bottom: calc(${cardHeight} + ${units.pm} * 2 + ${units.ms});
+  	z-index: 53;
 	border: 1px solid rgba(255, 255, 255, 0.4);
-	backdrop-filter: blur(15px) saturate(160%) contrast(120%);
+	backdrop-filter: blur(6px) saturate(160%) contrast(120%);
 `;
 
 export const FeedCardNameDiv = styled.div`
 	margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 `;
 
 export const FeedCardNameSpan = styled.span`
 	color: ${color.text};
-	${font.roboto};
+	${font.normal};
 	font-size: 28px;
-	text-align: start;
+  font-weight: 500;
+  text-align: center;
+`;
+
+export const FeedCardAgeSpan = styled.span`
+  color: ${color.text};
+  ${font.normal};
+  font-weight: 300;
+  font-size: 24px;
+  margin-top: ${units.ms};
+  line-height: 20px;
+  text-align: center;
 `;
 
 export const FeedCardBioDiv = styled.div`
@@ -63,7 +79,7 @@ export const FeedCardBioDiv = styled.div`
 
 export const FeedCardBioParagraph = styled.p`
 	font-size: 24px;
-	${font.roboto};
+	${font.normal};
 	padding: 0;
 	margin: 0;
 	color: ${color.text};
