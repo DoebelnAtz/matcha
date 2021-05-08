@@ -41,7 +41,7 @@ const BottomNav = () => {
 					<NeomorphicButton
 						height={'40px'}
 						width={'40px'}
-						style={{backgroundColor: color.gray100}}
+						style={{ backgroundColor: color.gray100 }}
 						onClick={() => handleNavClick('/')}
 					>
 						<BottomNavHomeIcon

@@ -9,32 +9,36 @@ import {
 	units,
 } from '../../../Styles';
 
-export const DropDown = styled.div`
+export const DropdownDiv = styled.div`
 	position: relative;
-	${font.RCReg};
-	color: ${color.primary};
+	${font.normal};
+	color: ${color.primary700};
 	font-size: 16px;
-	background-color: ${color.tertiary};
 	width: ${(props) => props.width};
 	height: ${(props) => props.height};
-	&:hover {
-		background-color: ${color.tertiary};
-	}
+`;
+
+export const DropDownIcon = styled.img`
+	margin: auto 0 auto auto;
+	height: calc(6px + ${(props) => props.height} * 0.1);
+	width: 16px;
+	transform: ${({ expanded }) =>
+		!expanded ? 'rotate(0deg)' : 'rotate(90deg)'};
+	transition: all 0.2s ease-in-out;
 `;
 
 export const CurrentOption = styled.div`
-	padding: 0 5px;
+	padding: 0 10px;
 	height: ${(props) => props.height};
 	font-size: 16px;
-	border: 1px solid ${color.primary};
-	//border-radius: 4px 4px ${(props) =>
-		props.expanded ? '0 0' : '4px 4px'};
-	border-bottom: ${(props) => (props.expanded ? 'none' : '')};
+	transition: all 0.2s ease-in-out;
+	border-radius: ${({ expanded }) =>
+		!expanded ? units.rm : `${units.rm} ${units.rm} 0 0`};
 	${cursor.clickable};
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	background-color: ${color.tertiary};
+	background-color: ${color.primary100};
 	text-transform: uppercase;
 	display: flex;
 	text-align: center;
@@ -43,25 +47,17 @@ export const CurrentOption = styled.div`
 		line-height: ${(props) => props.height};
 		margin: auto 0;
 	}
-	& img {
-		margin: auto 0 auto auto;
-		height: calc(6px + ${(props) => props.height} * 0.1);
-	}
 `;
 
 export const DropDownList = styled.div`
-	position: ${(props) =>
-		props.modalOverflow ? 'fixed' : 'absolute'};
-	//right: -1px;
-	width: calc(${(props) => props.width} - 2px);
-	background-color: ${color.gray100};
+	position: ${({ modalOverflow }) => (modalOverflow ? 'fixed' : 'absolute')};
+	width: calc(${({ width }) => width} - 2px);
+	background-color: ${color.primary100};
 	z-index: 5;
-	max-height: 300px;
+	max-height: 200px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	//top: calc(${(props) => `${props.height}`} - 1px);
-	//border-radius: 0 0 4px 4px;
-	border: 1px solid ${color.primary};
+	border-radius: 0 0 ${units.rm} ${units.rm};
 `;
 
 export const SearchInput = styled.input`
@@ -73,22 +69,24 @@ export const SearchInput = styled.input`
 
 export const Option = styled.div`
 	${font.text};
-	font-size: 12px;
-	letter-spacing: 0;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	font-weight: 300;
+	color: ${color.primary700};
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	height: 24px;
+	height: 28px;
 	width: calc(100% - 8px);
-	line-height: 24px;
+	line-height: 28px;
 	margin: 0 auto;
-	padding: 0 4px;
+	padding: 0 10px;
 	text-align: left;
 	background-color: ${(props) =>
-		props.highlighted ? color.tertiary : color.gray200};
+		props.highlighted ? color.tertiary : color.primary100};
 	transition: background-color 0.05s;
 	${cursor.clickable};
 	&:hover {
-		background-color: ${color.tertiaryShade};
+		background-color: ${color.primary200};
 	}
 `;

@@ -6,6 +6,7 @@ export const BottomNavDiv = styled.div`
 	height: 100%;
 	background-color: transparent;
 	display: flex;
+
 	padding-bottom: calc(${units.pm} + env(safe-area-inset-bottom));
 `;
 
@@ -14,7 +15,7 @@ export const BottomNavIconContainer = styled.div`
 	display: flex;
 	justify-content: center;
 `;
-const radiusSize = `28px`
+const radiusSize = `28px`;
 
 export const BottomNavIconDiv = styled.div`
 	padding: 0 ${units.pl};
@@ -55,9 +56,9 @@ export const BottomNavHomeIconContainer = styled.div`
 	height: 80px;
 	flex-shrink: 0;
 	display: flex;
-	z-index: 3;
+	z-index: 103;
 	border-radius: 40px;
-	background-color: ${color.gray300};
+	background: linear-gradient(0deg, ${color.gray300} 50%, transparent 50%);
 	position: absolute;
 	bottom: 10px;
 `;

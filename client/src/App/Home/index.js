@@ -45,7 +45,7 @@ const Home = () => {
 					<BottomNav />
 				</HomeBottomNav>
 				<HomeTopNav>
-					<TopNav/>
+					<TopNav />
 				</HomeTopNav>
 			</HomeContainerDiv>
 		</HomeDiv>

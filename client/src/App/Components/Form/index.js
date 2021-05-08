@@ -8,7 +8,7 @@ import {
   RadioInput,
   SubmitButton,
 } from "./styles";
-import DropDownComponent from "../DropDown";
+import Dropdown from "../DropDown";
 
 const assembleState = (config) => {
   if (!config) return {};
@@ -71,7 +71,7 @@ const Form = ({ config, onSubmit, state, setState }) => {
     switch (configElement.element) {
       case "dropdown":
         return (
-          <DropDownComponent
+          <Dropdown
             width={"160px"}
             state={state[configElement.name]}
             optionList={configElement.values.map((val, index) => ({

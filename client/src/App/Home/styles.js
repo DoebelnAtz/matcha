@@ -16,10 +16,10 @@ export const HomeContainerDiv = styled.div`
 	max-width: 375px;
 	max-height: 812px;
 	margin: auto;
-  	border-radius: 20px;
+	border-radius: 20px;
 
-  	overflow: hidden;
-	background-color: ${color.gray300};
+	overflow: hidden;
+	background-color: transparent;
 	display: flex;
 	position: relative;
 	flex-shrink: 0;
@@ -31,10 +31,11 @@ const bottomNavSize = '80px';
 export const ViewContainerDiv = styled.div`
 	width: 100%;
 	height: calc(
-		100% - ${topNavSize} - ${bottomNavSize} - env(safe-area-inset-bottom)
+		100% - ${topNavSize} - ${bottomNavSize} + 30px -
+			env(safe-area-inset-bottom)
 	);
-  position: relative;
-  
+	position: relative;
+
 	margin: ${topNavSize} auto ${bottomNavSize} auto;
 	background-color: ${color.gray300};
 `;

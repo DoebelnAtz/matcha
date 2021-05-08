@@ -2,11 +2,15 @@ import React, { useRef, useState } from 'react';
 import {
 	FeedCardAgeSpan,
 	FeedCardBioDiv,
-	FeedCardBioParagraph, FeedCardContainerDiv,
+	FeedCardBioParagraph,
+	FeedCardContainerDiv,
 	FeedCardContentDiv,
 	FeedCardDiv,
 	FeedCardNameDiv,
-	FeedCardNameSpan, FeedCardTag, FeedCardTagDiv, FeedCardTagName,
+	FeedCardNameSpan,
+	FeedCardTag,
+	FeedCardTagDiv,
+	FeedCardTagName,
 	ProfilePictureDiv,
 } from './styles';
 import Picture from '../../../Components/Picture';
@@ -31,30 +35,25 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 	const ref = useRef(null);
 	const [expanded, setExpanded] = useState(false);
 
-	const expansionSpring = useSpring(
-		{
-			height: expanded ? ref.current.clientHeight : '70px',
-
-		}
-	)
+	const expansionSpring = useSpring({
+		height: expanded ? ref.current.clientHeight : '70px',
+	});
 
 	const viewProfile = () => {
-		setExpanded(true)
-	}
+		setExpanded(true);
+	};
 
 	const renderTags = () => {
 		if (profile.tags) {
-			return (
-				profile.tags.map((tag, index) => {
-					return (
-						<FeedCardTag key={index}>
-							<FeedCardTagName>{tag}</FeedCardTagName>
-						</FeedCardTag>
-					)
-				})
-			)
+			return profile.tags.map((tag, index) => {
+				return (
+					<FeedCardTag key={index}>
+						<FeedCardTagName>{tag}</FeedCardTagName>
+					</FeedCardTag>
+				);
+			});
 		}
-	}
+	};
 
 	const bind = useDrag(
 		({
@@ -63,7 +62,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			initial: [ox, oy],
 			direction: [xDir],
 			vxvy: [vx],
-			tap
+			tap,
 		}) => {
 			if (tap) {
 				viewProfile();
@@ -90,7 +89,8 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			// console.log(Math.floor(x), Math.floor(y), r, ox, oy);
 
 			set({ xy: [x + xCorrection, y + yCorrection, r] });
-		}, {bounds: {top: -50, bottom: 20}, filterTaps: true}
+		},
+		{ bounds: { top: -50, bottom: 20 }, filterTaps: true },
 	);
 	return (
 		<>
@@ -105,31 +105,29 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				page={page}
 				index={index}
 			>
-				<FeedCardContentDiv style={expansionSpring} expanded={expanded} id={'content'}>
+				<FeedCardContentDiv
+					style={expansionSpring}
+					expanded={expanded}
+					id={'content'}
+				>
 					<FeedCardContainerDiv ref={ref}>
-
-					<FeedCardNameDiv>
-						<FeedCardNameSpan>
-							{capitalizeFirst(profile.name)}
-						</FeedCardNameSpan>
-
-					</FeedCardNameDiv>
-					<FeedCardAgeSpan>
-						{calculateAge(profile.dob)}
-					</FeedCardAgeSpan>
-					<FeedCardBioParagraph>
-						{profile.bio}
-					</FeedCardBioParagraph>
-						<FeedCardTagDiv>
-							{renderTags()}
-						</FeedCardTagDiv>
+						<FeedCardNameDiv>
+							<FeedCardNameSpan>
+								{capitalizeFirst(profile.name)}
+							</FeedCardNameSpan>
+						</FeedCardNameDiv>
+						<FeedCardAgeSpan>
+							{calculateAge(profile.dob)}
+						</FeedCardAgeSpan>
+						<FeedCardBioParagraph>
+							{profile.bio}
+						</FeedCardBioParagraph>
+						<FeedCardTagDiv>{renderTags()}</FeedCardTagDiv>
 					</FeedCardContainerDiv>
 				</FeedCardContentDiv>
 				<ProfilePictureDiv id={'profile-picture'}>
 					<Picture pic={profile.pictures[0]} />
-
 				</ProfilePictureDiv>
-
 			</FeedCardDiv>
 		</>
 	);
