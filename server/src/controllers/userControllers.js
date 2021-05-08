@@ -21,9 +21,16 @@ const getProfileFeed = catchErrors(async (req, res) => {
 	const page = req.query.page;
 	let profiles = await query(
 		`
-		SELECT name, dob, gender, bio, pictures 
-		FROM users 
-		WHERE NOT u_id = $1 
+		SELECT name, dob, gender, bio, pictures, t.tags 
+		FROM users u 
+		LEFT JOIN 
+		(
+			SELECT u_id, ARRAY_AGG(value) as tags 
+			FROM tags JOIN users_tags USING(t_id) 
+			GROUP BY u_id
+		) 
+		t ON t.u_id = u.u_id 
+		WHERE NOT u.u_id = $1 
 		ORDER BY name ASC OFFSET $2 LIMIT 3
 	`,
 		[id, page],

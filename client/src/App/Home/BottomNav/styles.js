@@ -14,7 +14,7 @@ export const BottomNavIconContainer = styled.div`
 	display: flex;
 	justify-content: center;
 `;
-const radiusSize = `32px`
+const radiusSize = `28px`
 
 export const BottomNavIconDiv = styled.div`
 	padding: 0 ${units.pl};

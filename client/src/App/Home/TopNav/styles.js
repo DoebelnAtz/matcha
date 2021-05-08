@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { color, cursor, shadows, units } from '../../../Styles';
 
 const navColor = color.gray100;
-const radiusSize = `32px`
+const radiusSize = `28px`
 export const TopNavDiv = styled.div`
 	width: 100%;
 	height: 100%;

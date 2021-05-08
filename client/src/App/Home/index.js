@@ -14,6 +14,7 @@ import Profile from './Profile';
 import BottomNav from './BottomNav';
 import ProfilePhotos from './Profile/ProfilePhotos';
 import TopNav from './TopNav';
+import ProfileSettings from './Profile/ProfileSettings';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -34,6 +35,9 @@ const Home = () => {
 						</Route>
 						<Route exact path={'/profile/photos'}>
 							<ProfilePhotos />
+						</Route>
+						<Route exact path={'/profile/settings'}>
+							<ProfileSettings />
 						</Route>
 					</Switch>
 				</ViewContainerDiv>

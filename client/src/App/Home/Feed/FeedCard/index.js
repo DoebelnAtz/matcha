@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
 	FeedCardAgeSpan,
 	FeedCardBioDiv,
-	FeedCardBioParagraph,
+	FeedCardBioParagraph, FeedCardContainerDiv,
 	FeedCardContentDiv,
 	FeedCardDiv,
 	FeedCardNameDiv,
-	FeedCardNameSpan,
+	FeedCardNameSpan, FeedCardTag, FeedCardTagDiv, FeedCardTagName,
 	ProfilePictureDiv,
 } from './styles';
 import Picture from '../../../Components/Picture';
@@ -28,6 +28,33 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 		xy: [0, 0, 0],
 		config,
 	}));
+	const ref = useRef(null);
+	const [expanded, setExpanded] = useState(false);
+
+	const expansionSpring = useSpring(
+		{
+			height: expanded ? ref.current.clientHeight : '70px',
+
+		}
+	)
+
+	const viewProfile = () => {
+		setExpanded(true)
+	}
+
+	const renderTags = () => {
+		if (profile.tags) {
+			return (
+				profile.tags.map((tag, index) => {
+					return (
+						<FeedCardTag key={index}>
+							<FeedCardTagName>{tag}</FeedCardTagName>
+						</FeedCardTag>
+					)
+				})
+			)
+		}
+	}
 
 	const bind = useDrag(
 		({
@@ -36,7 +63,11 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			initial: [ox, oy],
 			direction: [xDir],
 			vxvy: [vx],
+			tap
 		}) => {
+			if (tap) {
+				viewProfile();
+			}
 			const velocity = Math.min(0.25, Math.abs(vx));
 			const trigger = velocity > 0.2; // If you flick hard enough it should trigger the card to fly out
 			const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
@@ -59,7 +90,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			// console.log(Math.floor(x), Math.floor(y), r, ox, oy);
 
 			set({ xy: [x + xCorrection, y + yCorrection, r] });
-		}, {bounds: {top: -50, bottom: 20}}
+		}, {bounds: {top: -50, bottom: 20}, filterTaps: true}
 	);
 	return (
 		<>
@@ -74,20 +105,31 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 				page={page}
 				index={index}
 			>
-				<ProfilePictureDiv id={'profile-picture'}>
-					<Picture pic={profile.pictures[0]} />
-				<FeedCardContentDiv id={'content'}>
+				<FeedCardContentDiv style={expansionSpring} expanded={expanded} id={'content'}>
+					<FeedCardContainerDiv ref={ref}>
+
 					<FeedCardNameDiv>
 						<FeedCardNameSpan>
 							{capitalizeFirst(profile.name)}
 						</FeedCardNameSpan>
 
 					</FeedCardNameDiv>
-						<FeedCardAgeSpan>
+					<FeedCardAgeSpan>
 						{calculateAge(profile.dob)}
-						</FeedCardAgeSpan>
+					</FeedCardAgeSpan>
+					<FeedCardBioParagraph>
+						{profile.bio}
+					</FeedCardBioParagraph>
+						<FeedCardTagDiv>
+							{renderTags()}
+						</FeedCardTagDiv>
+					</FeedCardContainerDiv>
 				</FeedCardContentDiv>
+				<ProfilePictureDiv id={'profile-picture'}>
+					<Picture pic={profile.pictures[0]} />
+
 				</ProfilePictureDiv>
+
 			</FeedCardDiv>
 		</>
 	);
