@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	ProfileBioDiv,
 	ProfileDoBDiv,
@@ -7,18 +7,34 @@ import {
 	ProfileLastnameDiv,
 	ProfileNameDiv,
 	ProfilePreferenceDiv,
+	ProfileSettingsButtonContainer,
 	ProfileSettingsContainer,
+	ProfileSettingsDiscardButton,
 	ProfileSettingsDiv,
+	ProfileSettingsSaveButton,
+	ProfileTagsDiv,
 } from './styles';
 import { useGet } from '../../../../Hooks';
 import ProfileInput from './ProfileInput';
 import ProfileTextarea from './ProfileTextarea';
 import ProfileDoB from './ProfileDoB';
 import ProfileDropdown from './ProfileDropdown';
+import api from '../../../../Api';
+import LoadingButton from '../../../Components/LoadingButton';
+import { useHistory } from 'react-router-dom';
+import ProfileTags from './ProfileTags';
+
 const ProfileSettings = () => {
 	const [profile, setProfile, isLoading] = useGet('/users/me');
 
 	console.log(profile);
+
+	const history = useHistory();
+	/*
+	every time the profile changes we send a PUT update, a bit inefficient
+	since it updates the whole profile, could be improved by doing a smarter
+	PATCH with only updated parts being sent.
+	* */
 
 	const handleNameChange = (e) => {
 		setProfile({ ...profile, name: e.target.value });
@@ -49,6 +65,18 @@ const ProfileSettings = () => {
 
 	const handlePreferenceChange = (newPreference) => {
 		setProfile({ ...profile, preference: newPreference.option });
+	};
+
+	const updateProfile = async () => {
+		try {
+			await api.put('/users/me', {
+				profile,
+			});
+			return true;
+		} catch (e) {
+			console.log(e);
+			return false;
+		}
 	};
 
 	return (
@@ -109,7 +137,7 @@ const ProfileSettings = () => {
 										? 2
 										: 3,
 							}}
-							onChange={handleGenderChange}
+							onChange={handlePreferenceChange}
 							options={[
 								{ option: 'male', id: 1 },
 								{ option: 'female', id: 2 },
@@ -119,11 +147,24 @@ const ProfileSettings = () => {
 					</ProfilePreferenceDiv>
 					<ProfileBioDiv>
 						<ProfileTextarea
-							name={'bio'}
+							name={'Bio'}
 							onChange={handleBioChange}
 							value={profile.bio}
 						/>
 					</ProfileBioDiv>
+					<ProfileTagsDiv>
+						<ProfileTags value={profile.tags} />
+					</ProfileTagsDiv>
+					<ProfileSettingsButtonContainer>
+						<ProfileSettingsDiscardButton
+							onClick={() => history.push('/profile')}
+						>
+							Discard
+						</ProfileSettingsDiscardButton>
+						<LoadingButton onClick={updateProfile}>
+							Save
+						</LoadingButton>
+					</ProfileSettingsButtonContainer>
 				</ProfileSettingsContainer>
 			)}
 		</ProfileSettingsDiv>

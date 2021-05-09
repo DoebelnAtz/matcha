@@ -5,11 +5,11 @@ const baseColor = '#ffffff';
 
 export const colorAdjust = {
 	darken: (color, amount) => Color(color).darken(amount).hex(),
-	lighten: (color, amount) => Color(color).lighten(amount).string(),
+	lighten: (color, amount) => Color(color).lighten(amount).hex(),
 	rgba: (color, opacity) => Color(color).alpha(opacity).string(),
 };
 
-const palette = {
+const palette2 = {
 	primary100: `#FDEDED`,
 	primary200: `#f3A5A7`,
 	primary300: `#EC6F73`,
@@ -33,15 +33,68 @@ const palette = {
 	danger900: `#130202`,
 };
 
+const palette = {
+	primary: `#B5171D`,
+	secondary: '#17B5AF',
+	gray: `#bebebe`,
+	success: '#6BAB90',
+	danger100: `#FDECEC`,
+	danger200: `#F9B4B5`,
+	danger300: `#F68E90`,
+	danger400: `#F15558`,
+	danger500: `#EE2E31`,
+	danger700: `#840B0D`,
+	danger900: `#130202`,
+};
+
+const paletteShades = {
+	primary100: colorAdjust.lighten(palette.primary, 1.4),
+	primary200: colorAdjust.lighten(palette.primary, 1.2),
+	primary300: colorAdjust.lighten(palette.primary, 0.8),
+	primary400: colorAdjust.lighten(palette.primary, 0.4),
+	primary500: palette.primary,
+	primary700: colorAdjust.darken(palette.primary, 0.4),
+	primary900: colorAdjust.darken(palette.primary, 0.8),
+	secondary100: colorAdjust.lighten(palette.secondary, 1.4),
+	secondary200: colorAdjust.lighten(palette.secondary, 1.0),
+	secondary300: colorAdjust.lighten(palette.secondary, 0.6),
+	secondary400: colorAdjust.lighten(palette.secondary, 0.4),
+	secondary500: palette.secondary,
+	secondary700: colorAdjust.darken(palette.secondary, 0.4),
+	secondary900: colorAdjust.darken(palette.secondary, 0.8),
+	gray100: colorAdjust.lighten(palette.gray, 0.3),
+	gray200: colorAdjust.lighten(palette.gray, 0.24),
+	gray300: colorAdjust.lighten(palette.gray, 0.15),
+	gray400: colorAdjust.lighten(palette.gray, 0.1),
+	gray500: palette.gray,
+	gray600: colorAdjust.darken(palette.gray, 0.1),
+	gray700: colorAdjust.darken(palette.gray, 0.4),
+	gray900: colorAdjust.darken(palette.gray, 0.8),
+	success100: colorAdjust.lighten(palette.success, 0.5),
+	success200: colorAdjust.lighten(palette.success, 0.4),
+	success300: colorAdjust.lighten(palette.success, 0.3),
+	success400: colorAdjust.lighten(palette.success, 0.2),
+	success500: palette.success,
+	success700: colorAdjust.darken(palette.success, 0.4),
+	success900: colorAdjust.darken(palette.success, 0.8),
+	danger100: `#FDECEC`,
+	danger200: `#F9B4B5`,
+	danger300: `#F68E90`,
+	danger400: `#F15558`,
+	danger500: `#EE2E31`,
+	danger700: `#840B0D`,
+	danger900: `#130202`,
+};
+
 export const color = {
-	...palette,
-	primary: palette.primary500,
-	primaryShade: palette.primary700,
-	secondary: '#FF684F',
+	...paletteShades,
+	primary: paletteShades.primary500,
+	primaryShade: paletteShades.primary700,
+	secondary: paletteShades.secondary500,
 	secondaryShade: colorAdjust.darken('#FF684F', 0.1),
 	tertiary: '#FFE8D8',
 	tertiaryShade: colorAdjust.darken('#FFE8D8', 0.1),
-	text: palette.primary900,
+	text: paletteShades.primary900,
 };
 
 export const units = {
@@ -61,7 +114,7 @@ export const units = {
 
 export const font = {
 	normal: css`
-      font-family: 'Quicksand', sans-serif;
+		font-family: 'Quicksand', sans-serif;
 	`,
 	title: css`
 		font-size: 36px;
@@ -171,15 +224,19 @@ export const components = {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		background-color: ${color.tertiary};
+		${font.normal};
+		color: ${color.primary700};
+		width: calc(100% - ${units.ps} * 2);
+		padding: 4px ${units.ps};
+		text-align: start;
+		margin: ${units.mm} 0 0 0;
+		border-radius: ${units.rm};
+		font-size: 20px;
 		border: none;
-		caret-color: ${color.primary};
-		caret-shape: block;
-		color: ${color.primary};
-		padding: 2px 6px;
-		font-size: 16px;
-		border-radius: 0;
-		box-shadow: none;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		background-color: ${color.primary100};
+		white-space: nowrap;
 		&:focus {
 			outline: none;
 		}
@@ -234,24 +291,22 @@ export const components = {
 		}
 	`,
 	button: css`
-		padding: 4px 12px;
+		padding: 4px ${units.pl};
 		letter-spacing: 1px;
 		text-transform: uppercase;
-		height: 30px;
 		font-size: 20px;
 		${font.normal};
-		line-height: 18px;
-		background-color: ${color.primary};
+		background-color: ${color.primary100};
 		${cursor.clickable};
-		border-radius: 4px;
-		border: 2px solid ${color.gray100};
+		border-radius: ${units.rm};
+		border: none;
 		transition: background-color 0.1s;
-		color: ${color.gray100};
+		color: ${color.primary700};
 		&:focus {
 			outline: none;
 		}
 		&:hover {
-			background-color: ${colorAdjust.darken(color.primary, 0.1)};
+			background-color: ${color.primary200};
 		}
 		&:disabled {
 			color: ${color.primary}90;

@@ -1,5 +1,9 @@
 const logIncoming = (req, res, next) => {
-	console.log(`path: ${req.path} | query: ${JSON.stringify(req.query)}`);
+	console.log(
+		`path: ${req.path} | type: ${req.method} | query: ${JSON.stringify(
+			req.query,
+		)}`,
+	);
 	next();
 };
 

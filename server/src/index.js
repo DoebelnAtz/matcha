@@ -9,19 +9,21 @@ const logIncoming = require('./middleware/log');
 const testRouter = require('./routes/testRoutes');
 const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRouter');
+const tagRouter = require('./routes/tagRouter');
 const imageRouter = require('./routes/imageRouter');
 const setup = require('./db/setup/index');
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/api', logIncoming);
 app.use('/api/auth', authRouter);
 app.use('/api', checkToken);
 app.use('/api/users', userRouter);
+app.use('/api/tags', tagRouter);
 app.use('/api/images', imageRouter);
-
-app.use('/', handleError);
+app.use('/api', handleError);
 
 setup();
 

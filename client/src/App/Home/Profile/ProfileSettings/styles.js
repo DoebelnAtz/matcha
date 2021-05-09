@@ -40,3 +40,28 @@ export const ProfileDoBDiv = styled.div`
 export const ProfileBioDiv = styled.div`
 	width: 100%;
 `;
+
+export const ProfileTagsDiv = styled.div`
+	width: 100%;
+`;
+
+export const ProfileSettingsButtonContainer = styled.div`
+	width: 100%;
+	display: flex;
+	margin-top: ${units.mm};
+	margin-bottom: ${units.ml};
+`;
+
+export const ProfileSettingsSaveButton = styled.button`
+	${components.button};
+`;
+
+export const ProfileSettingsDiscardButton = styled.button`
+	${components.button};
+	margin-right: auto;
+	background-color: ${color.gray500};
+	color: ${color.gray900};
+	&:hover {
+		background-color: ${color.gray600};
+	}
+`;

@@ -37,7 +37,7 @@ export const BlurredBackgroundDiv = styled.div`
 			circle,
 			${color.gray400}22 50%,
 			${color.gray400}66 60%,
-			${color.gray400}ff 70%
+			${color.gray400}ff 69%
 		);
 		backdrop-filter: blur(1px);
 		content: '';
@@ -127,7 +127,7 @@ export const ProfilePageOptionButtonDiv = styled.div`
 export const ProfilePageButton = styled.div`
 	background-image: url(${(props) => props.src});
 	background-position: center;
-	background-size: cover;
+	background-size: 46px;
 	background-repeat: no-repeat;
 	width: 50px;
 	height: 50px;

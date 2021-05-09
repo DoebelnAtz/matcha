@@ -7,7 +7,19 @@ const getMe = catchErrors(async (req, res) => {
 	const id = req.decoded.u_id;
 	let user = await query(
 		`
-        SELECT email, name, lastname, dob, u_id, bio, verified, preference, gender, pictures FROM users WHERE u_id = $1
+        SELECT 
+        	email, name, lastname, 
+        	dob, u.u_id, bio, verified, 
+        	preference, gender, pictures, t.tags 
+        FROM users u
+        LEFT JOIN 
+		(
+			SELECT u_id, ARRAY_AGG(value) as tags 
+			FROM tags JOIN users_tags USING(t_id) 
+			GROUP BY u_id
+		) 
+		t ON t.u_id = u.u_id 
+        WHERE u.u_id = $1
     `,
 		[id],
 	);
@@ -55,8 +67,33 @@ const updateProfilePictures = catchErrors(async (req, res) => {
 	res.json({ success: true });
 }, 'Failed to update profile pictures');
 
+const updateProfile = catchErrors(async (req, res) => {
+	const { profile } = req.body;
+	const userId = req.decoded.u_id;
+	await query(
+		`
+		UPDATE users SET 
+			name=$1, lastname=$2, email=$3,
+			dob=$4, bio=$5, preference=$6, gender=$7 
+		WHERE u_id = $8
+	`,
+		[
+			profile.name,
+			profile.lastname,
+			profile.email,
+			profile.dob,
+			profile.bio,
+			profile.preference,
+			profile.gender,
+			userId,
+		],
+	);
+	res.json(profile);
+}, 'Failed to update profile');
+
 module.exports = {
 	getMe,
 	getProfileFeed,
 	updateProfilePictures,
+	updateProfile,
 };

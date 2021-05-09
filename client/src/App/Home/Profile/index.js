@@ -63,7 +63,8 @@ const Profile = () => {
 						</NeomorphicButton>
 						<NeomorphicButton
 							onClick={() => history.push('/profile/settings')}
-							style={{ marginTop: '60px' }}>
+							style={{ marginTop: '60px' }}
+						>
 							<ProfilePageButton src={SettingsIcon} />
 						</NeomorphicButton>
 						<NeomorphicButton

@@ -64,6 +64,7 @@ const Dropdown = ({
 
 	// we copy the optionList to a state, here we make sure it updates when the
 	// input changes
+
 	useEffect(() => {
 		setOptions(optionList);
 	}, [optionList.length]);
@@ -124,24 +125,24 @@ const Dropdown = ({
 					alt={'v'}
 				/>
 			</CurrentOption>
-			{expanded && (
-				<DropDownList
-					modalOverflow={modalOverflow}
-					width={width}
-					height={height}
-				>
-					{withFilter && (
-						<SearchInput
-							ref={filterInputRef}
-							placeholder={'filter'}
-							onChange={(e) => handleFilterChange(e)}
-							onKeyDown={(e) => handleEnterPress(e)}
-							value={filterInput}
-						/>
-					)}
-					{renderOptions()}
-				</DropDownList>
-			)}
+
+			<DropDownList
+				expanded={expanded}
+				modalOverflow={modalOverflow}
+				width={width}
+				height={height}
+			>
+				{withFilter && (
+					<SearchInput
+						ref={filterInputRef}
+						placeholder={'filter'}
+						onChange={(e) => handleFilterChange(e)}
+						onKeyDown={(e) => handleEnterPress(e)}
+						value={filterInput}
+					/>
+				)}
+				{renderOptions()}
+			</DropDownList>
 		</DropdownDiv>
 	);
 };

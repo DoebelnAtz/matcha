@@ -8,14 +8,14 @@ export const ButtonDiv = styled.div`
 	width: ${({ width }) => width};
 	border-radius: 50%;
 	display: flex;
-	background-color: ${color.gray300};
+	background-color: ${color.gray200};
 	${cursor.clickable};
-	transition: all 0.1s ease-in-out;
+	transition: all 0.15s ease-in-out;
 
 	box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.2),
 		-4px -4px 10px 2px rgba(255, 255, 255, 0.5),
-		inset 2px 2px 10px 0px rgba(0, 0, 0, 0.1),
-		inset -2px -2px 10px 0px rgba(255, 255, 255, 0.5);
+		inset 2px 2px 10px 0px rgba(0, 0, 0, 0.05),
+		inset -2px -2px 10px 0px rgba(255, 255, 255, 0.2);
 	&:hover {
 		box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.2),
 			-4px -4px 10px 2px rgba(255, 255, 255, 0.5),

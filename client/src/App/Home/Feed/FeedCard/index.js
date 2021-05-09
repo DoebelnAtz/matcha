@@ -122,7 +122,9 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 						<FeedCardBioParagraph>
 							{profile.bio}
 						</FeedCardBioParagraph>
-						<FeedCardTagDiv>{renderTags()}</FeedCardTagDiv>
+						{profile.tags && (
+							<FeedCardTagDiv>{renderTags()}</FeedCardTagDiv>
+						)}
 					</FeedCardContainerDiv>
 				</FeedCardContentDiv>
 				<ProfilePictureDiv id={'profile-picture'}>
