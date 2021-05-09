@@ -21,9 +21,7 @@ import { calculateAge, capitalizeFirst } from '../../../../Utils';
 
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (x, y, r) => `
-perspective(1500px)
 translate3d(${x}px, ${y}px, 0) 
-rotateX(${-y / 20}deg) 
 rotate(${r}deg)`;
 
 const config = { mass: 1, tension: 500, friction: 45 };
@@ -93,45 +91,41 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 		{ bounds: { top: -50, bottom: 20 }, filterTaps: true },
 	);
 	return (
-		<>
-			<FeedCardDiv
-				onContextMenu={(e) => {
-					//this prevents righ-click contentmenue event on long tab to pop up the menu
-					e.preventDefault();
-				}}
-				key={index}
-				style={{ transform: props.xy.interpolate(trans) }}
-				{...bind()}
-				page={page}
-				index={index}
+		<FeedCardDiv
+			onContextMenu={(e) => {
+				//this prevents righ-click contentmenue event on long tab to pop up the menu
+				e.preventDefault();
+			}}
+			key={index}
+			style={{ transform: props.xy.interpolate(trans) }}
+			{...bind()}
+			page={page}
+			index={index}
+		>
+			<FeedCardContentDiv
+				style={expansionSpring}
+				expanded={expanded}
+				id={'content'}
 			>
-				<FeedCardContentDiv
-					style={expansionSpring}
-					expanded={expanded}
-					id={'content'}
-				>
-					<FeedCardContainerDiv ref={ref}>
-						<FeedCardNameDiv>
-							<FeedCardNameSpan>
-								{capitalizeFirst(profile.name)}
-							</FeedCardNameSpan>
-						</FeedCardNameDiv>
-						<FeedCardAgeSpan>
-							{calculateAge(profile.dob)}
-						</FeedCardAgeSpan>
-						<FeedCardBioParagraph>
-							{profile.bio}
-						</FeedCardBioParagraph>
-						{profile.tags && (
-							<FeedCardTagDiv>{renderTags()}</FeedCardTagDiv>
-						)}
-					</FeedCardContainerDiv>
-				</FeedCardContentDiv>
-				<ProfilePictureDiv id={'profile-picture'}>
-					<Picture pic={profile.pictures[0]} />
-				</ProfilePictureDiv>
-			</FeedCardDiv>
-		</>
+				<FeedCardContainerDiv ref={ref}>
+					<FeedCardNameDiv>
+						<FeedCardNameSpan>
+							{capitalizeFirst(profile.name)}
+						</FeedCardNameSpan>
+					</FeedCardNameDiv>
+					<FeedCardAgeSpan>
+						{calculateAge(profile.dob)}
+					</FeedCardAgeSpan>
+					<FeedCardBioParagraph>{profile.bio}</FeedCardBioParagraph>
+					{profile.tags && (
+						<FeedCardTagDiv>{renderTags()}</FeedCardTagDiv>
+					)}
+				</FeedCardContainerDiv>
+			</FeedCardContentDiv>
+			<ProfilePictureDiv id={'profile-picture'}>
+				<Picture pic={profile.pictures[0]} />
+			</ProfilePictureDiv>
+		</FeedCardDiv>
 	);
 };
 

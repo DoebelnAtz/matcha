@@ -4,9 +4,7 @@ import {
 	BottomNavDiv,
 	BottomNavHomeIcon,
 	BottomNavHomeIconContainer,
-	BottomNavIcon,
 	BottomNavIconContainer,
-	BottomNavIconDiv,
 	BottomNavProfileIcon,
 	BottomNavSearchIcon,
 } from './styles';

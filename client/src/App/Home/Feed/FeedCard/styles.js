@@ -3,8 +3,11 @@ import { color, font, units } from '../../../../Styles';
 import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+
 	width: calc(100% - ${units.mm} * 2);
-	height: calc(94% - ${units.mm} - ${units.mxl});
+	height: calc(100% - ${units.mm} - ${units.mxl});
 	margin: ${units.mm} ${units.ml} ${units.mxl} ${units.mm};
 	position: absolute;
 	top: 0;
@@ -19,7 +22,7 @@ export const FeedCardDiv = styled(animated.div)`
 
 export const ProfilePictureDiv = styled.div`
 	width: 100%;
-	height: calc(100%);
+	height: 100%;
 	position: absolute;
 	overflow: hidden;
 	border-radius: ${units.rm};

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {
+	DeleteTagDiv,
 	ProfileAddTagButton,
 	ProfileAddTagDiv,
 	ProfileTagDiv,
@@ -9,7 +10,7 @@ import {
 	ProfileTagsDiv,
 	ProfileTagTitleContainer,
 } from './styles';
-import EditIcon from '../../../../../Assets/icons/edit.svg';
+import DeleteIcon from '../../../../../Assets/icons/delete_white.svg';
 import SearchSelect from '../../../../Components/SearchSelect';
 import { useGet } from '../../../../../Hooks';
 import api from '../../../../../Api';
@@ -30,7 +31,12 @@ const ProfileTags = ({ value, onChange }) => {
 	const renderTags = () => {
 		if (value && value.length) {
 			return value.map((tag) => {
-				return <ProfileTagDiv>{`#${tag}`}</ProfileTagDiv>;
+				return (
+					<ProfileTagDiv key={tag}>
+						{`#${tag}`}
+						<DeleteTagDiv src={DeleteIcon} />
+					</ProfileTagDiv>
+				);
 			});
 		}
 	};

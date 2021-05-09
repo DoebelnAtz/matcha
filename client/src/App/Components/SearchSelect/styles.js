@@ -33,6 +33,7 @@ export const SearchIcon = styled.img`
 export const OptionSearch = styled.input`
 	${components.input};
 	margin: 0;
+	font-size: 16px;
 	width: 120px;
 	text-overflow: ellipsis;
 	overflow: hidden;

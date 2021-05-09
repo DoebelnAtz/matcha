@@ -6,50 +6,17 @@ export const BottomNavDiv = styled.div`
 	height: 100%;
 	background-color: transparent;
 	display: flex;
-
-	padding-bottom: calc(${units.pm} + env(safe-area-inset-bottom));
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: translate3d(0, 0, 0);
 `;
 
 export const BottomNavIconContainer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	padding-bottom: env(safe-area-inset-bottom);
 `;
 const radiusSize = `28px`;
-
-export const BottomNavIconDiv = styled.div`
-	padding: 0 ${units.pl};
-	display: flex;
-	${cursor.clickable};
-	width: 100%;
-	transition: all 0.1s ease-in-out;
-	${(props) =>
-		props.active
-			? css`
-					box-shadow: inset 2px 2px 10px 2px rgba(0, 0, 0, 0.15),
-						inset -2px -2px 10px 2px rgba(255, 255, 255, 0.9);
-			  `
-			: css`
-					box-shadow: inset 1px 1px 10px 2px rgba(0, 0, 0, 0.1),
-						inset -1px -1px 10px 2px rgba(255, 255, 255, 0.8);
-			  `};
-	&:hover {
-		box-shadow: inset 3px 3px 10px 2px rgba(0, 0, 0, 0.2),
-			inset -3px -3px 10px 2px rgba(255, 255, 255, 1);
-		& > div {
-			transform: scale(0.98);
-		}
-	}
-	&:nth-child(1n) {
-		border-radius: 0;
-	}
-	&:first-child {
-		border-radius: ${units.rm} 0 0 ${units.rm};
-	}
-	&:last-child {
-		border-radius: 0 ${units.rm} ${units.rm} 0;
-	}
-`;
 
 export const BottomNavHomeIconContainer = styled.div`
 	width: 80px;
@@ -60,7 +27,7 @@ export const BottomNavHomeIconContainer = styled.div`
 	border-radius: 40px;
 	background: linear-gradient(0deg, ${color.gray300} 50%, transparent 50%);
 	position: absolute;
-	bottom: 10px;
+	bottom: calc(10px + env(safe-area-inset-bottom));
 `;
 
 export const BottomNavHomeIcon = styled.div`
@@ -81,7 +48,7 @@ export const BottomNavProfileIcon = styled.div`
 	height: calc(50px + env(safe-area-inset-bottom));
 	margin-top: auto;
 	background-color: ${navColor};
-	border-right: 2px solid ${color.gray200};
+	border-right: 2px solid ${color.gray300};
 	${cursor.clickable};
 	transition: all 0.1s ease-in-out;
 	background-image: url(${(props) => props.src});
@@ -102,7 +69,7 @@ export const BottomNavProfileIcon = styled.div`
 		transition: all 0.1s ease-in-out;
 
 		background-color: transparent;
-		bottom: 50px;
+		bottom: calc(50px + env(safe-area-inset-bottom));
 		height: calc(${radiusSize} * 2);
 		width: ${radiusSize};
 		border-bottom-left-radius: ${radiusSize};
@@ -115,7 +82,7 @@ export const BottomNavSearchIcon = styled.div`
 	height: calc(50px + env(safe-area-inset-bottom));
 	margin-top: auto;
 	background-color: ${navColor};
-	border-left: 2px solid ${color.gray200};
+	border-left: 2px solid ${color.gray300};
 	transition: all 0.1s ease-in-out;
 	${cursor.clickable};
 	background-image: url(${(props) => props.src});
@@ -132,9 +99,8 @@ export const BottomNavSearchIcon = styled.div`
 		content: '';
 		position: absolute;
 		transition: all 0.1s ease-in-out;
-
 		background-color: transparent;
-		bottom: 50px;
+		bottom: calc(50px + env(safe-area-inset-bottom));
 		right: 0;
 		height: calc(${radiusSize} * 2);
 		width: ${radiusSize};

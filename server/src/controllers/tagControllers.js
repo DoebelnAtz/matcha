@@ -12,7 +12,14 @@ const searchTags = catchErrors(async (req, res) => {
 
 	const resultsPrefix = await query(
 		`
-		SELECT t_id, value FROM tags WHERE value LIKE $1 LIMIT 10
+		SELECT 
+			t_id, value 
+		FROM 
+			tags 
+		WHERE 
+			value LIKE $1 
+			ORDER BY value ASC
+			LIMIT 10
 	`,
 		[`${search}%`],
 	);
@@ -39,6 +46,8 @@ const searchTags = catchErrors(async (req, res) => {
 	console.log(results);
 	res.json(results);
 }, 'Failed to search for tags');
+
+const deleteTag = catchErrors(async (req, res) => {}, 'Failed to delete tag');
 
 const addTag = catchErrors(async (req, res) => {
 	const { value } = req.body;

@@ -219,6 +219,15 @@ export const cursor = {
 	`,
 };
 
+export const backgroundImage = (src, size) => {
+	return css`
+		background-image: url(${src});
+		background-size: ${size};
+		background-position: center;
+		background-repeat: no-repeat;
+	`;
+};
+
 export const components = {
 	input: css`
 		-webkit-appearance: none;

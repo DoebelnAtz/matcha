@@ -2,13 +2,7 @@ import React from 'react';
 import { useGet, useRedirect } from '../../Hooks';
 import { getLocalAuth } from '../../Utils';
 import Feed from './Feed';
-import {
-	HomeBottomNav,
-	HomeDiv,
-	HomeTopNav,
-	HomeContainerDiv,
-	ViewContainerDiv,
-} from './styles';
+import { HomeBottomNav, HomeDiv, HomeTopNav, ViewContainerDiv } from './styles';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './Profile';
 import BottomNav from './BottomNav';
@@ -24,30 +18,28 @@ const Home = () => {
 	);
 	return (
 		<HomeDiv>
-			<HomeContainerDiv>
-				<ViewContainerDiv>
-					<Switch>
-						<Route exact path={'/'}>
-							<Feed />
-						</Route>
-						<Route exact path={'/profile'}>
-							<Profile />
-						</Route>
-						<Route exact path={'/profile/photos'}>
-							<ProfilePhotos />
-						</Route>
-						<Route exact path={'/profile/settings'}>
-							<ProfileSettings />
-						</Route>
-					</Switch>
-				</ViewContainerDiv>
-				<HomeBottomNav>
-					<BottomNav />
-				</HomeBottomNav>
-				<HomeTopNav>
-					<TopNav />
-				</HomeTopNav>
-			</HomeContainerDiv>
+			<ViewContainerDiv>
+				<Switch>
+					<Route exact path={'/'}>
+						<Feed />
+					</Route>
+					<Route exact path={'/profile'}>
+						<Profile />
+					</Route>
+					<Route exact path={'/profile/photos'}>
+						<ProfilePhotos />
+					</Route>
+					<Route exact path={'/profile/settings'}>
+						<ProfileSettings />
+					</Route>
+				</Switch>
+			</ViewContainerDiv>
+			<HomeBottomNav id={'bottom-nav'}>
+				<BottomNav />
+			</HomeBottomNav>
+			<HomeTopNav>
+				<TopNav />
+			</HomeTopNav>
 		</HomeDiv>
 	);
 };

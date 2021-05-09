@@ -2,17 +2,19 @@ import styled from 'styled-components';
 import { color, cursor, font, shadows, units } from '../../../Styles';
 
 export const ProfileDiv = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-`;
-
-export const ProfileContainer = styled.div`
 	width: calc(100% - ${units.pm} * 2);
 	height: 100%;
 	display: flex;
+	position: relative;
+	touch-action: none;
+	-ms-touch-action: none;
 	flex-direction: column;
-	padding: ${units.pm};
+	padding: 0 ${units.pm};
+	overflow-y: hidden;
+`;
+
+export const ProfileContainer = styled.div`
+	overflow-y: auto;
 `;
 
 const profilePicSize = '220px';
@@ -22,7 +24,7 @@ export const ProfilePictureContainer = styled.div`
 	width: 100%;
 	height: calc((${profilePicSize} + ${frameSize}) / 2);
 	border-bottom: 2px solid ${color.primary};
-	margin-top: ${units.mxl};
+	margin-top: ${units.ml};
 	display: flex;
 `;
 
@@ -30,7 +32,6 @@ export const BlurredBackgroundDiv = styled.div`
 	height: calc(${profilePicSize} + ${frameSize});
 	width: calc(${profilePicSize} + ${frameSize});
 	position: absolute;
-
 	z-index: 3;
 	&:after {
 		background: radial-gradient(
@@ -78,7 +79,7 @@ export const ProfilePictureImage = styled.div`
 export const ProfilePageContentContainer = styled.div`
 	width: 100%;
 	display: flex;
-	margin-top: calc((${profilePicSize} + ${frameSize}) / 2 + ${units.mxl});
+	margin-top: calc((${profilePicSize} + ${frameSize}) / 2 + ${units.mm});
 	flex-direction: column;
 `;
 
@@ -91,18 +92,20 @@ export const ProfilePageNameDiv = styled.div`
 export const ProfilePageNameSpan = styled.span`
 	${font.normal};
 	font-size: 32px;
-	color: ${color.text};
+	font-weight: 700;
+	color: ${color.primary700};
 `;
 
 export const ProfilePageOptionContainer = styled.div`
 	display: flex;
+	margin: ${units.mm} auto 50px auto;
+
 	width: 100%;
-	margin-top: ${units.mxl};
 `;
 
 export const ProfilePageOptionButtonDiv = styled.div`
 	padding: ${units.ps};
-	margin: auto;
+	margin: ${units.mm} auto;
 	border-radius: 50%;
 	background-color: ${color.gray300};
 	${cursor.clickable};

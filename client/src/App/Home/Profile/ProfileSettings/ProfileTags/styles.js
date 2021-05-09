@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { color, components, font, units } from '../../../../../Styles';
+import {
+	backgroundImage,
+	color,
+	components,
+	cursor,
+	font,
+	units,
+} from '../../../../../Styles';
 
 export const ProfileTagsDiv = styled.div`
 	width: 100%;
@@ -29,16 +36,39 @@ export const ProfileTagsContainer = styled.div`
 	margin-top: ${units.mm};
 `;
 
+export const DeleteTagDiv = styled.div`
+	width: 0px;
+	height: 100%;
+	margin: auto auto auto 0;
+	border-radius: ${units.rm};
+	transition: all 0.3s ease-in-out 0.5s, background-color 0.3s ease-in-out 0s;
+	${({ src }) => backgroundImage(src, '20px')};
+	background-color: ${color.primary400}70;
+	${cursor.clickable};
+	&:hover {
+		background-color: ${color.primary400}aa;
+	}
+`;
+
 export const ProfileTagDiv = styled.div`
 	height: 24px;
+	display: flex;
+
 	padding: 4px ${units.pm};
 	background-color: ${color.primary200};
 	color: ${color.primary700};
 	text-align: center;
 	margin-right: ${units.mm};
 	border-radius: ${units.rm};
+
 	line-height: 24px;
 	${font.normal};
+	&:hover {
+		& ${DeleteTagDiv} {
+			width: 50px;
+			margin: auto auto auto ${units.pm};
+		}
+	}
 `;
 
 export const ProfileAddTagDiv = styled.div`

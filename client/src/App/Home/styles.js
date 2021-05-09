@@ -1,42 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color, layout, units } from '../../Styles';
 
 export const HomeDiv = styled.div`
 	width: 100%;
-	max-width: 1000px;
 	margin: auto;
 	height: 100%;
 	display: flex;
 	overflow: hidden;
-`;
-
-export const HomeContainerDiv = styled.div`
-	height: 100%;
-	width: 100%;
-	max-width: 375px;
-	max-height: 812px;
-	margin: auto;
-	border-radius: 20px;
-
-	overflow: hidden;
-	background-color: transparent;
-	display: flex;
-	position: relative;
-	flex-shrink: 0;
 `;
 
 const topNavSize = '60px';
-const bottomNavSize = '80px';
+const bottomNavSize = '50px';
 
 export const ViewContainerDiv = styled.div`
 	width: 100%;
-	height: calc(
-		100% - ${topNavSize} - ${bottomNavSize} + 30px -
-			env(safe-area-inset-bottom)
-	);
 	position: relative;
-
-	margin: ${topNavSize} auto ${bottomNavSize} auto;
+	overflow: hidden;
+	margin: ${topNavSize} auto
+		calc(${bottomNavSize} + env(safe-area-inset-bottom)) auto;
 	background-color: ${color.gray300};
 `;
 
@@ -50,7 +31,6 @@ export const HomeTopNav = styled.div`
 	top: 0;
 	z-index: 26;
 `;
-
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
 	width: calc(100%);
