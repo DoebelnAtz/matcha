@@ -12,7 +12,7 @@ export const ProfileTagsDiv = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: ${units.pm} 0;
+	padding: ${units.pm} 0 4px 0;
 	border-bottom: 2px solid ${color.primary}40;
 `;
 
@@ -41,7 +41,7 @@ export const DeleteTagDiv = styled.div`
 	height: 100%;
 	margin: auto auto auto 0;
 	border-radius: ${units.rm};
-	transition: all 0.3s ease-in-out 0.5s, background-color 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0.4s, background-color 0.3s ease-in-out 0s;
 	${({ src }) => backgroundImage(src, '20px')};
 	background-color: ${color.primary400}70;
 	${cursor.clickable};
@@ -53,14 +53,15 @@ export const DeleteTagDiv = styled.div`
 export const ProfileTagDiv = styled.div`
 	height: 24px;
 	display: flex;
-
+	user-select: none;
+	-moz-user-select: none;
 	padding: 4px ${units.pm};
 	background-color: ${color.primary200};
 	color: ${color.primary700};
 	text-align: center;
 	margin-right: ${units.mm};
 	border-radius: ${units.rm};
-
+	margin-bottom: ${units.ms};
 	line-height: 24px;
 	${font.normal};
 	&:hover {

@@ -1,4 +1,5 @@
 const catchErrors = require('../errors/catchErrors');
+const CustomError = require('../errors/customError');
 const { connect, query } = require('../db');
 
 const searchTags = catchErrors(async (req, res) => {
@@ -47,7 +48,35 @@ const searchTags = catchErrors(async (req, res) => {
 	res.json(results);
 }, 'Failed to search for tags');
 
-const deleteTag = catchErrors(async (req, res) => {}, 'Failed to delete tag');
+const removeTagFromUser = catchErrors(async (req, res) => {
+	const userId = req.decoded.u_id;
+	const { value } = req.body;
+
+	let target = await query(
+		`
+		SELECT t_id FROM tags WHERE value = $1
+	`,
+		[value],
+	);
+
+	if (!target.rows.length) {
+		throw new CustomError(
+			'No such tag',
+			404,
+			'Tried to remove non-existing tag from user',
+		);
+	}
+
+	await query(
+		`
+		DELETE FROM users_tags
+			WHERE t_id = $1 AND u_id = $2
+	`,
+		[target.rows[0].t_id, userId],
+	);
+
+	res.json({ success: true });
+}, 'Failed to delete tag');
 
 const addTag = catchErrors(async (req, res) => {
 	const { value } = req.body;
@@ -121,4 +150,5 @@ const addTag = catchErrors(async (req, res) => {
 module.exports = {
 	addTag,
 	searchTags,
+	removeTagFromUser,
 };

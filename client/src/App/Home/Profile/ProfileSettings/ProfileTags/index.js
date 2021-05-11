@@ -28,28 +28,48 @@ const ProfileTags = ({ value, onChange }) => {
 		inputRef.current.selectionEnd = value.length;
 	};
 
-	const renderTags = () => {
-		if (value && value.length) {
-			return value.map((tag) => {
-				return (
-					<ProfileTagDiv key={tag}>
-						{`#${tag}`}
-						<DeleteTagDiv src={DeleteIcon} />
-					</ProfileTagDiv>
-				);
-			});
-		}
-	};
-
 	const handleAddTagInputChange = (newVal) => {
 		setAddTagInput(newVal);
 	};
 
 	const handleAddTag = async (tagName) => {
 		try {
-			await api.put('/tags/tag', { value: tagName });
+			let resp = await api.put('/tags/add', { value: tagName });
+			console.log(resp);
+			onChange([tagName, ...(value || [])]);
 		} catch (e) {
 			console.log(e);
+		}
+	};
+
+	const handleRemoveTag = async (tagName) => {
+		try {
+			await api.delete('/tags/remove', {
+				value: tagName,
+			});
+			console.log(
+				tags,
+				tags.filter((tag) => tag !== tagName),
+			);
+			onChange(value.filter((tag) => tag !== tagName));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	const renderTags = () => {
+		if (value && value.length) {
+			return value.map((tag, index) => {
+				return (
+					<ProfileTagDiv key={index}>
+						{`#${tag}`}
+						<DeleteTagDiv
+							onClick={() => handleRemoveTag(tag)}
+							src={DeleteIcon}
+						/>
+					</ProfileTagDiv>
+				);
+			});
 		}
 	};
 
@@ -65,7 +85,9 @@ const ProfileTags = ({ value, onChange }) => {
 					value={addTagInput}
 					onChange={handleAddTagInputChange}
 					onSelect={(value) => handleAddTag(value)}
-					optionList={(tags || []).map((t) => t.value)}
+					optionList={(tags || [])
+						.map((t) => t.value)
+						.filter((tag) => !(value || []).includes(tag))}
 				/>
 
 				<ProfileAddTagButton onClick={() => handleAddTag(addTagInput)}>

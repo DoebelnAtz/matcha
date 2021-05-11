@@ -5,6 +5,8 @@ const tagRouter = express.Router();
 
 tagRouter.get('/search', tagControllers.searchTags);
 
-tagRouter.put('/tag', tagControllers.addTag);
+tagRouter.put('/add', tagControllers.addTag);
+
+tagRouter.delete('/remove', tagControllers.removeTagFromUser);
 
 module.exports = tagRouter;

@@ -67,6 +67,10 @@ const ProfileSettings = () => {
 		setProfile({ ...profile, preference: newPreference.option });
 	};
 
+	const handleTagChange = (updatedTags) => {
+		setProfile({ ...profile, tags: updatedTags });
+	};
+
 	const updateProfile = async () => {
 		try {
 			await api.put('/users/me', {
@@ -153,7 +157,10 @@ const ProfileSettings = () => {
 						/>
 					</ProfileBioDiv>
 					<ProfileTagsDiv>
-						<ProfileTags value={profile.tags} />
+						<ProfileTags
+							value={profile.tags}
+							onChange={handleTagChange}
+						/>
 					</ProfileTagsDiv>
 					<ProfileSettingsButtonContainer>
 						<ProfileSettingsDiscardButton
