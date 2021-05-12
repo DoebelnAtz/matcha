@@ -4,6 +4,7 @@ import { color, font, units } from '../../../Styles';
 export const DoBSelectorContainer = styled.div`
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 `;
 
 export const DoBTimeContainer = styled.div`
@@ -12,7 +13,10 @@ export const DoBTimeContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	${font.normal};
-	margin: ${units.mm} ${units.mm} 0 0;
+	margin: ${units.mm} ${units.ms} 0 0;
+	&:last-child {
+		margin: ${units.mm} 0 0 0;
+	}
 `;
 
 export const DropDownContainer = styled.div`

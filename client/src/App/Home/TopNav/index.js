@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { TopNavDiv, TopNavIconContainer } from './styles';
 
 const TopNav = () => {
-    return (
-        <TopNavDiv>
-        <TopNavIconContainer/>
-        </TopNavDiv>
-    )
+	const [state, setState] = useState(true);
+
+	return (
+		<TopNavDiv state={state}>
+			<TopNavIconContainer />
+		</TopNavDiv>
+	);
 };
 
-export default TopNav
+export default TopNav;

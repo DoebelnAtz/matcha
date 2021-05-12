@@ -19,14 +19,21 @@ const SearchSelect = ({ value, onChange, optionList, onSelect }) => {
 	useDismiss(insideRef, () => setExpanded(false));
 
 	const handleKeyPress = (e) => {
-		if (e.key === 'Enter' && optionList.length > selectedIndex) {
+		if (e.key === 'Enter') {
+			if (optionList.length > selectedIndex) {
+				onSelect(optionList[selectedIndex].option);
+			} else {
+				onSelect(value);
+			}
 		} else if (e.key === 'ArrowDown') {
 			e.preventDefault();
 			if (selectedIndex < optionList.length - 1) {
+				setSelectedIndex(selectedIndex + 1);
 			}
 		} else if (e.key === 'ArrowUp') {
 			e.preventDefault();
 			if (selectedIndex > 0) {
+				setSelectedIndex(selectedIndex - 1);
 			}
 		}
 	};
@@ -65,6 +72,7 @@ const SearchSelect = ({ value, onChange, optionList, onSelect }) => {
 				<OptionSearch
 					placeholder={'search'}
 					value={value}
+					onKeyDown={handleKeyPress}
 					onFocus={handleFocus}
 					onChange={handleSearchChange}
 				/>

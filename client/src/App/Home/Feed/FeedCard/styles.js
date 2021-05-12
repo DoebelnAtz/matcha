@@ -1,13 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color, font, units } from '../../../../Styles';
 import { animated } from 'react-spring';
 
 export const FeedCardDiv = styled(animated.div)`
 	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-transform-style: preserve-3d;
-
-	width: calc(100% - ${units.mm} * 2);
-	height: calc(100% - ${units.mm} - ${units.mxl});
+	height: calc(100% - ${units.mm} - 50px);
 	margin: ${units.mm} ${units.ml} ${units.mxl} ${units.mm};
 	position: absolute;
 	top: 0;
@@ -15,9 +13,21 @@ export const FeedCardDiv = styled(animated.div)`
 	flex-direction: column;
 	user-select: none;
 	overflow: visible;
+	transition: width 0.4s ease-in-out, margin 0.4s ease-in-out,
+		height 0.4s ease-in-out;
 	touch-action: none;
 	will-change: transform;
 	z-index: ${(props) => 50 - (props.index - props.page)};
+	${({ expanded }) =>
+		expanded
+			? css`
+					width: 100%;
+					margin: 0;
+					height: calc(100%);
+			  `
+			: css`
+					width: calc(100% - ${units.mm} * 2);
+			  `}
 `;
 
 export const ProfilePictureDiv = styled.div`
@@ -25,7 +35,7 @@ export const ProfilePictureDiv = styled.div`
 	height: 100%;
 	position: absolute;
 	overflow: hidden;
-	border-radius: ${units.rm};
+	border-radius: calc(${units.rl} - ${units.mm});
 `;
 
 const cardHeight = ({ expanded }) => (expanded ? '200px' : '70px');
@@ -34,19 +44,27 @@ export const FeedCardContentDiv = styled(animated.div)`
 	display: flex;
 	margin: auto auto ${units.ms} auto;
 	transition: all 0.5s ease-in-out;
-	//height: ${cardHeight};
 	flex-shrink: 0;
 	width: calc(100% - ${units.pm} * 2 - ${units.ms} * 2);
 	padding: ${units.pm};
-	background-color: ${({ expanded }) =>
-		expanded ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.7)'};
 	border-radius: ${units.rs};
 	flex-direction: column;
 	position: relative;
 	overflow: hidden;
 	z-index: 53;
 	border: 1px solid rgba(255, 255, 255, 0.4);
-	backdrop-filter: blur(6px) saturate(160%) contrast(120%);
+	backdrop-filter: blur(8px) saturate(80%) contrast(130%);
+	${({ expanded }) =>
+		expanded
+			? css`
+					background-color: rgba(255, 255, 255, 0.85);
+					border-radius: ${units.rs} ${units.rs}
+						calc(${units.rl} - ${units.ms})
+						calc(${units.rl} - ${units.ms});
+			  `
+			: css`
+					background-color: rgba(255, 255, 255, 0.6);
+			  `}
 `;
 
 export const FeedCardContainerDiv = styled.div`

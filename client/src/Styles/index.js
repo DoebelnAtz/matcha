@@ -86,6 +86,12 @@ const paletteShades = {
 	danger900: `#130202`,
 };
 
+export const modeSwitch = (light, dark) => {
+	return css`
+		${({ state }) => (state ? light : dark)}
+	`;
+};
+
 export const color = {
 	...paletteShades,
 	primary: paletteShades.primary500,

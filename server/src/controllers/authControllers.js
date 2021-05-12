@@ -169,6 +169,91 @@ const logIn = catchErrors(async (req, res) => {
 	});
 }, 'Failed to log in');
 
+const requestPasswordReset = catchErrors(async (req, res) => {
+	const resetId = v4();
+	const { email } = req.body;
+	let resetHash = await bcrypt.hash(`${resetId}${email}`, 10);
+	let expires = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000);
+
+	const client = await connect();
+	try {
+		await client.query('BEGIN');
+
+		let user = await client.query(
+			`
+			SELECT u_id, name, email FROM users WHERE email = $1
+		`,
+			[email],
+		);
+
+		if (user.rows.length !== 1) {
+			return res.status(404).json({
+				success: false,
+				message: 'No users found matching provided email',
+			});
+		}
+
+		const userId = user.rows[0].u_id;
+		await client.query(
+			`
+			INSERT INTO password_reset(email, hash, u_id, expires_by)
+			VALUES($1, $2, $3, $4)
+		`,
+			[email, resetHash, userId, expires],
+		);
+
+		let recipient = {};
+		recipient[email] = { hash: resetHash };
+		await sendPasswordReset();
+
+		await client.query('COMMIT');
+	} catch (e) {
+		await client.query('ROLLBACK');
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to request password reset',
+		});
+	} finally {
+		client.release();
+	}
+}, 'Failed to request password reset ');
+
+const sendPasswordReset = async (recipient) => {
+	const domain = 'mg.atzimuth.com';
+	const key = process.env.EMAIL_API_KEY;
+
+	const mg = mailgun({
+		apiKey: key,
+		domain: domain,
+		host: 'api.eu.mailgun.net',
+		testMode: false,
+	});
+
+	let html = await fs.readFileSync(
+		path.resolve(__dirname, '../html-templates/passwordResetEmail.html'),
+		'utf8',
+	);
+
+	const message = {
+		from: 'Matcha <noreply@mg.atzimuth.com>',
+		to: Object.keys(recipient),
+		subject: 'Reset your password',
+		html: html,
+		'recipient-variables': JSON.stringify(recipient),
+	};
+
+	mg.messages().send(message, (error, body) => {
+		if (error) {
+			throw new Error('failed to send password reset email');
+		}
+		console.log(body);
+	});
+};
+
+const resetPassword = catchErrors(async (req, res) => {
+	const { resetHash } = req.body;
+}, 'Failed to reset password');
+
 const sendEmailInvites = async (recipient) => {
 	//const formatted = data.emailHTML.replace('<URL_PLACEHOLDER>', link);
 	const domain = 'mg.atzimuth.com';

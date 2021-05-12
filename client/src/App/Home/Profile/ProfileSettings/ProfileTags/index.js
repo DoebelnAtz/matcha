@@ -37,6 +37,7 @@ const ProfileTags = ({ value, onChange }) => {
 			let resp = await api.put('/tags/add', { value: tagName });
 			console.log(resp);
 			onChange([tagName, ...(value || [])]);
+			setAddTagInput('');
 		} catch (e) {
 			console.log(e);
 		}
@@ -47,10 +48,6 @@ const ProfileTags = ({ value, onChange }) => {
 			await api.delete('/tags/remove', {
 				value: tagName,
 			});
-			console.log(
-				tags,
-				tags.filter((tag) => tag !== tagName),
-			);
 			onChange(value.filter((tag) => tag !== tagName));
 		} catch (e) {
 			console.log(e);
@@ -91,7 +88,7 @@ const ProfileTags = ({ value, onChange }) => {
 				/>
 
 				<ProfileAddTagButton onClick={() => handleAddTag(addTagInput)}>
-					Add tag
+					Add
 				</ProfileAddTagButton>
 			</ProfileAddTagDiv>
 			<ProfileTagsContainer>{renderTags()}</ProfileTagsContainer>

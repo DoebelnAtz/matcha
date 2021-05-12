@@ -31,14 +31,23 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 		config,
 	}));
 	const ref = useRef(null);
+	const contentRef = useRef(null);
 	const [expanded, setExpanded] = useState(false);
-
+	const [expandBio, setExpandBio] = useState(false);
 	const expansionSpring = useSpring({
-		height: expanded ? ref.current.clientHeight : '70px',
+		height:
+			expandBio && expanded
+				? ref.current.clientHeight || '200px'
+				: '70px',
 	});
 
-	const viewProfile = () => {
-		setExpanded(true);
+	const viewProfile = (e) => {
+		if (expanded) {
+			setExpandBio(false);
+			setExpanded(false);
+		} else {
+			setExpanded(true);
+		}
 	};
 
 	const renderTags = () => {
@@ -63,8 +72,21 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			tap,
 		}) => {
 			if (tap) {
-				viewProfile();
+				let contentHeight = contentRef.current.getBoundingClientRect()
+					.top;
+				console.log(
+					tap,
+					oy,
+					ox,
+					contentRef.current.getBoundingClientRect(),
+				);
+				if (expanded && oy > contentHeight) {
+					setExpandBio(!expandBio);
+				} else {
+					viewProfile();
+				}
 			}
+			if (expanded) return;
 			const velocity = Math.min(0.25, Math.abs(vx));
 			const trigger = velocity > 0.2; // If you flick hard enough it should trigger the card to fly out
 			const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
@@ -92,6 +114,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 	);
 	return (
 		<FeedCardDiv
+			expanded={expanded}
 			onContextMenu={(e) => {
 				//this prevents righ-click contentmenue event on long tab to pop up the menu
 				e.preventDefault();
@@ -104,7 +127,9 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 		>
 			<FeedCardContentDiv
 				style={expansionSpring}
+				expandBio={expandBio}
 				expanded={expanded}
+				ref={contentRef}
 				id={'content'}
 			>
 				<FeedCardContainerDiv ref={ref}>

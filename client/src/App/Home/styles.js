@@ -29,7 +29,7 @@ export const HomeTopNav = styled.div`
 	position: absolute;
 	backdrop-filter: blur(10px) contrast(80%) saturate(130%);
 	top: 0;
-	z-index: 26;
+	z-index: 55;
 `;
 export const HomeBottomNav = styled.div`
 	height: calc(${bottomNavSize} + env(safe-area-inset-bottom));
@@ -37,5 +37,5 @@ export const HomeBottomNav = styled.div`
 	background-color: transparent;
 	position: absolute;
 	bottom: 0;
-	z-index: 9;
+	z-index: 55;
 `;

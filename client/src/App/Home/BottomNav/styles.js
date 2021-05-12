@@ -6,6 +6,8 @@ export const BottomNavDiv = styled.div`
 	height: 100%;
 	background-color: transparent;
 	display: flex;
+	position: relative;
+	z-index: 55;
 	-webkit-transform-style: preserve-3d;
 	-webkit-transform: translate3d(0, 0, 0);
 `;
