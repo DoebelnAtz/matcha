@@ -33,7 +33,7 @@ const getProfileFeed = catchErrors(async (req, res) => {
 	const page = req.query.page;
 	let profiles = await query(
 		`
-		SELECT name, dob, gender, bio, pictures, t.tags 
+		SELECT u.u_id, name, dob, gender, bio, pictures, t.tags, l.u1_id 
 		FROM users u 
 		LEFT JOIN 
 		(
@@ -42,7 +42,8 @@ const getProfileFeed = catchErrors(async (req, res) => {
 			GROUP BY u_id
 		) 
 		t ON t.u_id = u.u_id 
-		WHERE NOT u.u_id = $1 
+		LEFT JOIN likes l ON l.u2_id = u.u_id
+		WHERE NOT u.u_id = $1 AND (l.u1_id != $1 OR l.u1_id IS NULL)
 		ORDER BY name ASC OFFSET $2 LIMIT 3
 	`,
 		[id, page],
@@ -91,9 +92,60 @@ const updateProfile = catchErrors(async (req, res) => {
 	res.json(profile);
 }, 'Failed to update profile');
 
+const likeUser = catchErrors(async (req, res) => {
+	const userId = req.decoded.u_id;
+	const { targetId } = req.body;
+
+	const client = await connect();
+	try {
+		await client.query('BEGIN');
+
+		// check for existing like
+		let targetLike = await client.query(
+			`
+			SELECT u1_id, u2_id FROM likes
+			WHERE u1_id = $1 AND u2_id = $2
+		`,
+			[targetId, userId],
+		);
+
+		// if user hasnt been liked yet nothing will be returned
+		if (!targetLike.rows.length) {
+			await client.query(
+				`
+				INSERT INTO likes (u1_id, u2_id, u1likes)
+				VALUES ($1, $2, TRUE)
+			`,
+				[userId, targetId],
+			);
+		} else {
+			await client.query(
+				`
+				UPDATE likes SET u2likes = TRUE, match = TRUE
+				WHERE u1_id = $1 AND u2_id = $2
+				`,
+				[targetId, userId],
+			);
+		}
+
+		if (targetLike) await client.query('COMMIT');
+	} catch (e) {
+		await client.query('ROLLBACK');
+		console.log(e);
+		return res.status(500).json({
+			success: false,
+			message: 'Failed to like user',
+		});
+	} finally {
+		client.release();
+	}
+	res.json({ success: true });
+}, 'Failed to like user');
+
 module.exports = {
 	getMe,
 	getProfileFeed,
 	updateProfilePictures,
 	updateProfile,
+	likeUser,
 };

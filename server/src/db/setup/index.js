@@ -173,6 +173,17 @@ const setup = async () => {
 	`);
 
 	await query(`
+		CREATE TABLE IF NOT EXISTS likes (
+			u1_id TEXT REFERENCES users (u_id) NOT NULL,
+			u2_id TEXT REFERENCES users (u_id) NOT NULL,
+			u1likes BOOLEAN DEFAULT FALSE,
+			u2likes BOOLEAN DEFAULT FALSE,
+			match BOOLEAN DEFAULT FALSE,
+			UNIQUE(u2_id, u1_id)
+		)
+	`);
+
+	await query(`
 		CREATE TABLE IF NOT EXISTS users_tags (
 			t_id INT REFERENCES tags(t_id) ON DELETE CASCADE NOT NULL,
 			u_id TEXT REFERENCES users(u_id) ON DELETE CASCADE NOT NULL,

@@ -18,7 +18,7 @@ import { useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import BlurredBackground from '../../../Components/BlurredBackground';
 import { calculateAge, capitalizeFirst } from '../../../../Utils';
-
+import api from '../../../../Api';
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (x, y, r) => `
 translate3d(${x}px, ${y}px, 0) 
@@ -33,10 +33,10 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 	const ref = useRef(null);
 	const contentRef = useRef(null);
 	const [expanded, setExpanded] = useState(false);
-	const [expandBio, setExpandBio] = useState(false);
+	const [expandbio, setExpandBio] = useState(false);
 	const expansionSpring = useSpring({
 		height:
-			expandBio && expanded
+			expandbio && expanded
 				? ref.current.clientHeight || '200px'
 				: '70px',
 	});
@@ -47,6 +47,16 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			setExpanded(false);
 		} else {
 			setExpanded(true);
+		}
+	};
+
+	const handleUserLike = async () => {
+		try {
+			await api.put('/users/like', {
+				targetId: profile.u_id,
+			});
+		} catch (e) {
+			console.log(e);
 		}
 	};
 
@@ -74,14 +84,8 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			if (tap) {
 				let contentHeight = contentRef.current.getBoundingClientRect()
 					.top;
-				console.log(
-					tap,
-					oy,
-					ox,
-					contentRef.current.getBoundingClientRect(),
-				);
 				if (expanded && oy > contentHeight) {
-					setExpandBio(!expandBio);
+					setExpandBio(!expandbio);
 				} else {
 					viewProfile();
 				}
@@ -94,6 +98,9 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 			if (!down && trigger) {
 				isGone = true;
 				setPage(page + 1);
+				if (dir === 1) {
+					handleUserLike();
+				}
 			}
 			const x = isGone ? (300 + window.innerWidth) * dir : down ? mx : 0; // When a card is gone it flys out left or right, otherwise goes back to zero
 			const y = down ? my / 2 : 0; // When a card is gone it flies out left or right, otherwise goes back to zero
@@ -127,7 +134,7 @@ const FeedCard = ({ profile, page, setPage, index }) => {
 		>
 			<FeedCardContentDiv
 				style={expansionSpring}
-				expandBio={expandBio}
+				expandbio={expandbio}
 				expanded={expanded}
 				ref={contentRef}
 				id={'content'}

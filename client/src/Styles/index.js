@@ -122,6 +122,9 @@ export const font = {
 	normal: css`
 		font-family: 'Quicksand', sans-serif;
 	`,
+	logo: css`
+		font-family: 'Leckerli One', cursive;
+	`,
 	title: css`
 		font-size: 36px;
 		letter-spacing: 2px;
