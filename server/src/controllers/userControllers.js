@@ -92,7 +92,7 @@ const updateProfile = catchErrors(async (req, res) => {
 	res.json(profile);
 }, 'Failed to update profile');
 
-const likeUser = catchErrors(async (req, res) => {
+const likeProfile = catchErrors(async (req, res) => {
 	const userId = req.decoded.u_id;
 	const { targetId } = req.body;
 
@@ -142,10 +142,62 @@ const likeUser = catchErrors(async (req, res) => {
 	res.json({ success: true });
 }, 'Failed to like user');
 
+const searchProfiles = catchErrors(async (req, res) => {
+	const search = req.query.q;
+
+	/*
+	 	search for 10 matches starting prefixed by
+		string, then search for any profiles containing the
+		string
+	*/
+
+	const resultsPrefix = await query(
+		`
+		SELECT 
+			name, pictures, dob, u_id 
+		FROM 
+			users
+		WHERE 
+			LOWER(name) LIKE $1 
+			ORDER BY name ASC
+			LIMIT 10
+	`,
+		[`${search.toLowerCase()}%`],
+	);
+
+	let resultsAny = { rows: [] };
+
+	if (resultsPrefix.rows.length < 10) {
+		const excludedIds = resultsPrefix.rows.map((u) => u.u_id);
+		console.log(excludedIds, resultsPrefix.rows);
+		resultsAny = await query(
+			`
+		SELECT 
+			name, pictures, dob, u_id 
+		FROM 
+			users
+		WHERE 
+			LOWER(name) LIKE $1 
+			AND NOT u_id = ANY($2::text[]) 
+			ORDER BY name ASC
+		LIMIT ${10 - resultsPrefix.rows.length}
+	`,
+			[`%${search.toLowerCase()}%`, excludedIds],
+		);
+	}
+
+	let results = [...resultsPrefix.rows, ...resultsAny.rows];
+	console.log(results);
+	res.json(
+		results.map((res) => ({ ...res, pictures: JSON.parse(res.pictures) })),
+	);
+}, 'Failed to search for profiles');
+
 module.exports = {
 	getMe,
 	getProfileFeed,
 	updateProfilePictures,
 	updateProfile,
-	likeUser,
+	likeProfile,
+	searchProfiles,
 };

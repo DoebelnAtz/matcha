@@ -9,6 +9,7 @@ import BottomNav from './BottomNav';
 import ProfilePhotos from './Profile/ProfilePhotos';
 import TopNav from './TopNav';
 import ProfileSettings from './Profile/ProfileSettings';
+import Search from './Search';
 
 const Home = () => {
 	const [user, setUser] = useGet('/users/me');
@@ -25,6 +26,9 @@ const Home = () => {
 					</Route>
 					<Route exact path={'/profile'}>
 						<Profile />
+					</Route>
+					<Route exact path={'/search'}>
+						<Search />
 					</Route>
 					<Route exact path={'/profile/photos'}>
 						<ProfilePhotos />

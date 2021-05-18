@@ -36,7 +36,8 @@ const searchTags = catchErrors(async (req, res) => {
 		FROM tags 
 		WHERE 
 			value LIKE $1 
-			AND NOT t_id = ANY($2::int[]) 
+			AND NOT t_id = ANY($2::int[])
+			ORDER BY value ASC 
 		LIMIT ${10 - resultsPrefix.rows.length}
 	`,
 			[`%${search}%`, excludedIds],
