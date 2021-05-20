@@ -12,17 +12,21 @@ const checkToken = (req, res, next) => {
 		token = token.slice(7, token.length);
 	}
 	if (token) {
-		jwt.verify(token, process.env.TOKEN_PASS, (err, decoded) => {
-			if (err) {
-				return res.status(401).json({
-					success: false,
-					message: 'Invalid token',
-				});
-			} else {
-				req.decoded = decoded;
-				next();
-			}
-		});
+		jwt.verify(
+			token,
+			process.env.TOKEN_PASS || 'development',
+			(err, decoded) => {
+				if (err) {
+					return res.status(401).json({
+						success: false,
+						message: 'Invalid token',
+					});
+				} else {
+					req.decoded = decoded;
+					next();
+				}
+			},
+		);
 	} else {
 		return res.status(401).json({
 			success: false,

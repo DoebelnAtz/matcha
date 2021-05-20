@@ -163,6 +163,10 @@ export const layout = {
 		display: flex;
 		flex-wrap: wrap;
 	`,
+	scrollPadding: css`
+		padding: 0 0 0 ${units.pm};
+		width: calc(100% - ${units.pm});
+	`,
 	col: css`
 		flex-basis: 0;
 		flex-grow: 1;

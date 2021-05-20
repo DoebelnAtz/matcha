@@ -5,6 +5,8 @@ export const AvatarContainer = styled.div`
 	width: ${({ width }) => width};
 	height: ${({ height }) => height};
 	overflow: hidden;
+	display: flex;
+	flex-grow: 1;
 	border-radius: ${units.rm};
 `;
 

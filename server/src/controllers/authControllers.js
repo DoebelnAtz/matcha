@@ -11,7 +11,6 @@ const { calculateAge } = require('../utils');
 
 const signUp = catchErrors(async (req, res) => {
 	const { email, password, name, dob } = req.body;
-
 	if (!email.length || !password.length || !name.length) {
 		throw new CustomError(
 			'Invalid input',
@@ -99,6 +98,7 @@ const verifyUser = catchErrors(async (req, res) => {
 
 const logIn = catchErrors(async (req, res) => {
 	const { email, password } = req.body;
+	console.log(email, password);
 
 	let existingUser;
 

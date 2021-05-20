@@ -14,7 +14,7 @@ import SettingsIcon from '../../../Assets/icons/settin_gear.svg';
 
 import SearchIcon from '../../../Assets/icons/search.svg';
 import NeomorphicButton from '../../Components/NeomorphicButton';
-import { color } from '../../../Styles';
+import { color, units } from '../../../Styles';
 
 const BottomNav = () => {
 	const history = useHistory();
@@ -37,9 +37,12 @@ const BottomNav = () => {
 				/>
 				<BottomNavHomeIconContainer>
 					<NeomorphicButton
-						height={'40px'}
-						width={'40px'}
-						style={{ backgroundColor: color.primary }}
+						height={'26px'}
+						width={'100px'}
+						style={{
+							backgroundColor: color.primary,
+							borderRadius: units.rs,
+						}}
 						onClick={() => handleNavClick('/')}
 					>
 						<BottomNavHomeIcon

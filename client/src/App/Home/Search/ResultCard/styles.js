@@ -7,6 +7,7 @@ export const ResultCardContainer = styled.div`
 	display: flex;
 	background-color: ${color.gray200};
 	margin-bottom: ${units.mm};
+	border-radius: ${units.rm};
 `;
 
 export const ResultCardPicture = styled.div`
@@ -19,13 +20,20 @@ export const ResultCardPicture = styled.div`
 	border-radius: ${units.rm};
 `;
 
+export const ResultCardContentContainer = styled.div`
+	width: calc(100% - ${units.ps} * 2 - 50px);
+	height: calc(100% - ${units.ps} * 2);
+	display: flex;
+	padding: ${units.ps};
+`;
+
 export const ResultCardNameDiv = styled.div`
 	display: flex;
-	margin-left: ${units.mm};
 `;
 
 export const ResultCardName = styled.span`
 	${font.normal};
+	line-height: 18px;
 	font-size: 18px;
 	color: ${color.text};
 `;

@@ -1,20 +1,19 @@
 import styled from 'styled-components';
-import { color, cursor, font, shadows, units } from '../../../Styles';
+import { color, cursor, font, layout, shadows, units } from '../../../Styles';
 
 export const ProfileDiv = styled.div`
-	width: calc(100% - ${units.pm} * 2);
+	${layout.scrollPadding};
 	height: 100%;
 	display: flex;
 	position: relative;
 	touch-action: none;
 	-ms-touch-action: none;
 	flex-direction: column;
-	padding: 0 ${units.pm};
-	overflow-y: hidden;
+	overflow-y: scroll;
 `;
 
 export const ProfileContainer = styled.div`
-	overflow-y: auto;
+	overflow-y: hidden;
 `;
 
 const profilePicSize = '220px';

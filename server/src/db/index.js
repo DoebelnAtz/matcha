@@ -1,27 +1,39 @@
 const pg = require('pg');
-const dbConfig = {
-	user: process.env.DB_USER,
-	host: process.env.DB_HOST,
-	database: process.env.DB_DATABASE,
-	password: process.env.DB_PASSWORD,
-};
-//console.log(dbConfig);
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname + '/../.env') });
+
+let dbConfig = {};
+
+if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'setup') {
+	dbConfig = {
+		user: process.env.T_DB_USER,
+		host: process.env.T_DB_HOST,
+		database: process.env.T_DB_DATABASE,
+		password: process.env.T_DB_PASSWORD,
+	};
+} else {
+	dbConfig = {
+		user: process.env.DB_USER,
+		host: process.env.DB_HOST,
+		database: process.env.DB_DATABASE,
+		password: process.env.DB_PASSWORD,
+	};
+}
+
 const pool = new pg.Pool(dbConfig);
 
 const client = new pg.Client(dbConfig);
-client.connect(function (err) {
-	if (err) {
-		return console.error('failed connecting to postgres', err);
-	}
-	client.query('SELECT NOW() AS "time"', function (err, result) {
-		if (err) {
-			return console.error('error running query', err);
-		}
-		console.log(result.rows[0].time);
+client
+	.connect()
+	.then((client) => {
+		client.query('SELECT NOW() AS "time"').then((res) => {
+			console.log(res.rows[0].time);
+		});
+	})
+	.catch((e) => {})
+	.finally(() => {
 		client.end();
 	});
-});
-
 exports.query = async (text, params) => {
 	return pool.query(text, params);
 };

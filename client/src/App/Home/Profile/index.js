@@ -27,50 +27,48 @@ const Profile = () => {
 
 	return (
 		<ProfileDiv>
-			<ProfileContainer>
-				<ProfilePictureContainer id={'profile-picture-container'}>
-					{!isLoading && (
-						<ProfilePictureDiv id={'profile-picture-div'}>
-							<BlurredBackgroundDiv>
-								<BlurredBackground
-									hash={profile.pictures[0].hash}
-									height={'300px'}
-									width={'300px'}
-								/>
-							</BlurredBackgroundDiv>
-							<ProfilePictureImage
-								id={'profile-pic'}
-								src={profile.pictures[0].url}
+			<ProfilePictureContainer id={'profile-picture-container'}>
+				{!isLoading && (
+					<ProfilePictureDiv id={'profile-picture-div'}>
+						<BlurredBackgroundDiv>
+							<BlurredBackground
+								hash={profile.pictures[0].hash}
+								height={'300px'}
+								width={'300px'}
 							/>
-						</ProfilePictureDiv>
+						</BlurredBackgroundDiv>
+						<ProfilePictureImage
+							id={'profile-pic'}
+							src={profile.pictures[0].url}
+						/>
+					</ProfilePictureDiv>
+				)}
+			</ProfilePictureContainer>
+			<ProfilePageContentContainer id={'content-container'}>
+				<ProfilePageNameDiv>
+					{!isLoading && (
+						<ProfilePageNameSpan>
+							{profile.name}
+						</ProfilePageNameSpan>
 					)}
-				</ProfilePictureContainer>
-				<ProfilePageContentContainer id={'content-container'}>
-					<ProfilePageNameDiv>
-						{!isLoading && (
-							<ProfilePageNameSpan>
-								{profile.name}
-							</ProfilePageNameSpan>
-						)}
-					</ProfilePageNameDiv>
-					<ProfilePageOptionContainer>
-						<NeomorphicButton>
-							<ProfilePageButton src={LikeIcon} />
-						</NeomorphicButton>
-						<NeomorphicButton
-							onClick={() => history.push('/profile/settings')}
-							style={{ marginTop: '60px' }}
-						>
-							<ProfilePageButton src={SettingsIcon} />
-						</NeomorphicButton>
-						<NeomorphicButton
-							onClick={() => history.push('/profile/photos')}
-						>
-							<ProfilePageButton src={PhotosIcon} />
-						</NeomorphicButton>
-					</ProfilePageOptionContainer>
-				</ProfilePageContentContainer>
-			</ProfileContainer>
+				</ProfilePageNameDiv>
+				<ProfilePageOptionContainer>
+					<NeomorphicButton>
+						<ProfilePageButton src={LikeIcon} />
+					</NeomorphicButton>
+					<NeomorphicButton
+						onClick={() => history.push('/profile/settings')}
+						style={{ marginTop: '60px' }}
+					>
+						<ProfilePageButton src={SettingsIcon} />
+					</NeomorphicButton>
+					<NeomorphicButton
+						onClick={() => history.push('/profile/photos')}
+					>
+						<ProfilePageButton src={PhotosIcon} />
+					</NeomorphicButton>
+				</ProfilePageOptionContainer>
+			</ProfilePageContentContainer>
 		</ProfileDiv>
 	);
 };

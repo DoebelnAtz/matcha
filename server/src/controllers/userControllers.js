@@ -26,7 +26,7 @@ const getMe = catchErrors(async (req, res) => {
 	user = parseQuery(user)[0];
 	user = { ...user, pictures: JSON.parse(user.pictures) };
 	res.json(user);
-}, '');
+}, 'Failed to get me');
 
 const getProfileFeed = catchErrors(async (req, res) => {
 	const id = req.decoded.u_id;
@@ -169,7 +169,6 @@ const searchProfiles = catchErrors(async (req, res) => {
 
 	if (resultsPrefix.rows.length < 10) {
 		const excludedIds = resultsPrefix.rows.map((u) => u.u_id);
-		console.log(excludedIds, resultsPrefix.rows);
 		resultsAny = await query(
 			`
 		SELECT 
@@ -187,7 +186,6 @@ const searchProfiles = catchErrors(async (req, res) => {
 	}
 
 	let results = [...resultsPrefix.rows, ...resultsAny.rows];
-	console.log(results);
 	res.json(
 		results.map((res) => ({ ...res, pictures: JSON.parse(res.pictures) })),
 	);

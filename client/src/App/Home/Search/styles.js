@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { color, components, units } from '../../../Styles';
+import { color, components, layout, units } from '../../../Styles';
 
 export const SearchDiv = styled.div`
 	display: flex;
 	height: 100%;
-	width: calc(100% - ${units.pm} * 2);
-	padding: 0 ${units.pm};
+	overflow-y: scroll;
+	${layout.scrollPadding};
 	flex-direction: column;
 `;
 
@@ -35,5 +35,5 @@ export const SearchIcon = styled.div`
 
 export const SearchResultList = styled.div`
 	flex-direction: column;
-	margin-top: ${units.ml};
+	margin: ${units.ml} 0;
 `;

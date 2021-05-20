@@ -21,25 +21,26 @@ export const BottomNavIconContainer = styled.div`
 const radiusSize = `28px`;
 
 export const BottomNavHomeIconContainer = styled.div`
-	width: 80px;
-	height: 80px;
+	width: 142px;
+	height: 68px;
 	flex-shrink: 0;
 	display: flex;
 	z-index: 103;
-	border-radius: 40px;
+	border-radius: ${units.rm};
 	background: linear-gradient(0deg, ${color.gray300} 50%, transparent 50%);
 	position: absolute;
-	bottom: calc(10px + env(safe-area-inset-bottom));
+	bottom: calc(16px + env(safe-area-inset-bottom));
 `;
 
 export const BottomNavHomeIcon = styled.div`
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 100%;
 	border-radius: 30px;
 	${cursor.clickable};
 	background-image: url(${(props) => props.src});
-	background-position: center;
-	background-size: 44px;
+	background-position: 50% 40%;
+	background-size: 34px;
+	margin: auto;
 	background-repeat: no-repeat;
 `;
 
@@ -54,7 +55,7 @@ export const BottomNavProfileIcon = styled.div`
 	${cursor.clickable};
 	transition: all 0.1s ease-in-out;
 	background-image: url(${(props) => props.src});
-	background-position: 40% 50%;
+	background-position: 30% 50%;
 	background-size: 34px;
 	z-index: 2;
 	position: relative;
@@ -88,7 +89,7 @@ export const BottomNavSearchIcon = styled.div`
 	transition: all 0.1s ease-in-out;
 	${cursor.clickable};
 	background-image: url(${(props) => props.src});
-	background-position: 60% 50%;
+	background-position: 70% 50%;
 	background-size: 34px;
 	background-repeat: no-repeat;
 	&:hover {

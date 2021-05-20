@@ -190,6 +190,7 @@ const setup = async () => {
 			UNIQUE(t_id, u_id)
 		)
 	`);
+	console.log('created tables');
 };
 
 module.exports = setup;
